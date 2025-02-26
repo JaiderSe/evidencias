@@ -7,11 +7,13 @@ package javaapplication43;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-/**
+/**   
+ * 
+ * 
  *
  * @author Ambiente
  */
-public class NewMain {
+public class Ejercicio1 {
     
     public static int  azul=0, rojo=0, magenta=0, gris=0, naranja=0, blanco=0, verde=0, amarillo=0;
     
