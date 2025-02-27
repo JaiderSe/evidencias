@@ -1,7 +1,8 @@
 package semana3.dos;
 
 import java.util.Random;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class Ejercicio1 {
@@ -11,21 +12,40 @@ public class Ejercicio1 {
         // Crear una matriz de enteros de 6x2
         int[][] matriz = new int[6][2];
         int[][] matrizusuario = new int[6][2];
-
-        // Asignar valores a la matriz
-        asignacion(matriz);
-        adivinar(matrizusuario);
-
-    /*     JOptionPane.showMessageDialog(null, "Por favor elija la modalidad que desea apostar: \n"
-                + "1. Color \n"
-                + "2. Número \n"
-                + "3. Paridad \n"
-                + "4. Rango \n"
-                + "5. Salir"); */
-
+        int option = 0;
+        int aciertos = 0;
         
-        imprimir(matriz);
-        imprimir(matrizusuario);
+        do{
+        option= Integer.parseInt(JOptionPane.showInputDialog(null, "Por favor elija la modalidad que desea apostar: \n"
+                + "1. Manual: usted escoge las balotas \n"
+                + "2. Automático el sistema escoge por usted las balotas\n"
+                + "3. Salir \n"));
+
+        switch (option) {
+            case 1:
+                // Asignar valores a la matriz
+                asignacion(matriz);
+                adivinar(matrizusuario);
+                aciertos = comparar(matriz, matrizusuario);
+                JOptionPane.showMessageDialog(null, "El número de aciertos es: " + aciertos);
+                break;
+            case 2:
+                asignacion(matriz);
+                asignacion(matrizusuario);
+                aciertos = comparar(matriz, matrizusuario);
+                JOptionPane.showMessageDialog(null, "El número de aciertos es: " + aciertos);
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "Digite una opción válida");
+                break;
+        }
+        
+        
+        }while(option!=3);
+
+        /* imprimir(matriz);
+        imprimir(matrizusuario); */
 
   
 
@@ -41,34 +61,41 @@ public static void imprimir(int [][] matriz){
             }
             System.out.println();
         }
-  }
 
+    public static void adivinar(int[][] matrizusuario) {
+            for (int i = 0; i < matrizusuario.length; i++) {
+                    for (int j = 0; j < matrizusuario[i].length; j++) {
+                            boolean valorValido = false;
 
-public static void adivinar(int [][] matrizusuario){
-   
-     for (int i = 0; i < matrizusuario.length; i++) {
-            for (int j = 0; j < matrizusuario[i].length; j++) {
+                            while (!valorValido) {
+                                    if (j == 0) {
+                                            int numero = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de la balota numero " + (i + 1)));
+                                            matrizusuario[i][j] = numero;
+                                    } else {
+                                            int color = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el color de la balota numero " + (i + 1) + "\n"
+                                                            + "1. Amarillo\n"
+                                                            + "2. Azul\n"
+                                                            + "3. Rojo\n"
+                                                            + "4. Verde\n"
+                                                            + "5. Blanco\n"
+                                                            + "6. Negro\n"));
+                                            matrizusuario[i][j] = color;
+                                    }
 
-                if (j == 0) {
-                    matrizusuario[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de la balota numero " + (i+1)));
-                } else {
-                    matrizusuario[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el color de la balota numero " + (i+1) + "\n"
-                        + "1. Amarillo\n"
-                        + "2. Azul\n"
-                        + "3. Rojo\n"
-                        + "4. Verde\n"
-                        + "5. Blanco\n"
-                        + "6. Negro\n"));
-                }
+                                    valorValido = true;
+                                    for (int k = 0; k < i; k++) {
+                                            if (matrizusuario[k][0] == matrizusuario[i][0] && matrizusuario[k][1] == matrizusuario[i][1]) {
+                                                    JOptionPane.showMessageDialog(null, "La combinación de número y color ya ha sido ingresada. Por favor, ingrese una combinación diferente.");
+                                                    valorValido = false;
+                                                    break;
+                                            }
+                                    }
+                            }
+                    }
             }
-            
-    
-        }
-}  
- 
+    }
 
-public static int comparar(int [][] matriz, int [][] matrizusuario){
-    
+    public static int comparar(int [][] matriz, int [][] matrizusuario){
     int aciertos = 0;
     int fallos = 0;
     
