@@ -7,6 +7,7 @@ public class Ejercicio1 {
 
     public static void main(String[] args) {
         
+        
         // Crear una matriz de enteros de 6x2
         int[][] matriz = new int[6][2];
         int[][] matrizusuario = new int[6][2];
@@ -51,7 +52,7 @@ public class Ejercicio1 {
         
         
 
-        
+
         }while(option!=3);
 
         /* imprimir(matriz);
@@ -62,7 +63,8 @@ public class Ejercicio1 {
 
          
     }
-public static void ganador(int aciertos){
+    
+    public static void ganador(int aciertos){
     switch (aciertos) {
         case 3:
             JOptionPane.showMessageDialog(null, "Felicidades, ha ganado 1000 pesos");
@@ -84,7 +86,7 @@ public static void ganador(int aciertos){
     }
 }
 
-public static void imprimir(int [][] matriz){
+    public static void imprimir(int [][] matriz){
 
         String colour;
         String conjuntobalotas = "";
@@ -174,8 +176,7 @@ public static void imprimir(int [][] matriz){
      return aciertos;
 }   
 
-
-public static void asignacion(int [][] matriz){
+    public static void asignacion(int [][] matriz){
 
         Random rand = new Random();
         
@@ -189,14 +190,6 @@ public static void asignacion(int [][] matriz){
     }
  
 }
-
-
-
-
-
-
-
-
 
 }
 
