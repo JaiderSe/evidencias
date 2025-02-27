@@ -1,8 +1,6 @@
 package semana3.dos;
 
 import java.util.Random;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class Ejercicio1 {
@@ -27,13 +25,23 @@ public class Ejercicio1 {
                 asignacion(matriz);
                 adivinar(matrizusuario);
                 aciertos = comparar(matriz, matrizusuario);
+                imprimir(matrizusuario);
+                imprimir(matriz);
                 JOptionPane.showMessageDialog(null, "El número de aciertos es: " + aciertos);
+                ganador(aciertos);
                 break;
+
             case 2:
                 asignacion(matriz);
                 asignacion(matrizusuario);
                 aciertos = comparar(matriz, matrizusuario);
+                imprimir(matrizusuario);
+                imprimir(matriz);
                 JOptionPane.showMessageDialog(null, "El número de aciertos es: " + aciertos);
+                ganador(aciertos);
+                break;
+
+            case 3:
                 break;
 
             default:
@@ -41,6 +49,8 @@ public class Ejercicio1 {
                 break;
         }
         
+        
+
         
         }while(option!=3);
 
@@ -52,15 +62,67 @@ public class Ejercicio1 {
 
          
     }
+public static void ganador(int aciertos){
+    switch (aciertos) {
+        case 3:
+            JOptionPane.showMessageDialog(null, "Felicidades, ha ganado 1000 pesos");
+            break;
+        case 4:
+            JOptionPane.showMessageDialog(null, "Felicidades, ha ganado 5000 pesos");
+            break;
+        case 5: 
+            JOptionPane.showMessageDialog(null, "Felicidades, ha ganado 10000 pesos");
+            break;  
+        case 6:
+            JOptionPane.showMessageDialog(null, "Felicidades, ha ganado 50000 pesos");
+            break;      
+            
+    
+        default:
+            JOptionPane.showMessageDialog(null, "No ha ganado nada");
+            break;
+    }
+}
 
 public static void imprimir(int [][] matriz){
 
+        String colour;
+        String conjuntobalotas = "";
+        colour="";
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + " ");
+                
+
+                switch (matriz[i][1]) {
+                    case 0:
+                        colour="Amarillo";
+                        break;
+                    case 1:
+                        colour=("Azul");
+                        break;
+                    case 2:
+                        colour=("Rojo");
+                        break;
+                    case 3:
+                        colour=("Verde");
+                        break;
+                    case 4:
+                        colour=("Blanco");
+                        break;
+                    case 5:
+                        colour=("Negro");
+                        break;
+
+                
+                }
+                
             }
-            System.out.println();
+            conjuntobalotas+= "\nBalota "+(i+1)+" numero "+matriz[i][0]+" color :"+colour;
+            
         }
+
+        JOptionPane.showMessageDialog(null, conjuntobalotas);
+}    
 
     public static void adivinar(int[][] matrizusuario) {
             for (int i = 0; i < matrizusuario.length; i++) {
