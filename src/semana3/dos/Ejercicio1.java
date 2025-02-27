@@ -33,7 +33,7 @@ public class Ejercicio1 {
          
     }
 
- public static void imprimir(int [][] matriz){
+public static void imprimir(int [][] matriz){
 
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
@@ -61,6 +61,7 @@ public static void adivinar(int [][] matrizusuario){
                         + "6. Negro\n"));
                 }
             }
+            
     
         }
 }  
@@ -99,6 +100,14 @@ public static void asignacion(int [][] matriz){
     }
  
 }
+
+
+
+
+
+
+
+
 
 }
 
