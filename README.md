@@ -1,3 +1,4 @@
+![Evidencias SENA](./ruta/a/tu/imagen.png)
 # Evidencias SENA
 
 Este repositorio contiene una colección de evidencias que documentan mi trayectoria profesional y académica.
