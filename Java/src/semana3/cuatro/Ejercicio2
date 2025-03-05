@@ -1,0 +1,82 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package quiz;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Ambiente
+ */
+public class Quiz 
+{
+        
+    public static double presupuesto; 
+    public static int categoria; 
+    public static double [] gastos = new double [6]; 
+    public static String [] dias = {"viernes","sabado","domingo"}; 
+    String informacion;
+
+    public static void main(String[] args) 
+    {
+        presupuesto=Double.parseDouble(JOptionPane.showInputDialog("Bienvenido a su programa de seguimiento de gastos para tus fds\nIngrese presuesto total inicial: "));
+        for (int i=0; i<3; i++){
+            JOptionPane.showMessageDialog(null,"Dia "+ dias[i]);
+            contarCateg();
+        }
+        
+        imprimirgastos();
+        
+        // TODO code application logic here
+    }
+    public static void contarCateg (){
+        
+        for (int i=0; i<3; i++){
+            categoria=Integer.parseInt(JOptionPane.showInputDialog("Digite que categoría quiere usar (solo 3): \n 1.Comida \n2.Transporte \n3.Entradas \n4.Regalos \n5.Otros.. "));
+            
+            switch (categoria){
+                case 1: 
+                    gastos[1]+=Double.parseDouble(JOptionPane.showInputDialog("Ingrese cuanto gasto en esta categoría: "));
+                break; 
+                case 2: 
+                    gastos[2]+=Double.parseDouble(JOptionPane.showInputDialog("Ingrese cuanto gasto en esta categoría: "));
+                break; 
+                case 3: 
+                    gastos[3]+=Double.parseDouble(JOptionPane.showInputDialog("Ingrese cuanto gasto en esta categoría: "));
+                break; 
+                case 4: 
+                    gastos[4]+=Double.parseDouble(JOptionPane.showInputDialog("Ingrese cuanto gasto en esta categoría: "));
+                break; 
+                case 5: 
+                    gastos[5]+=Double.parseDouble(JOptionPane.showInputDialog("Ingrese cuanto gasto en esta categoría: "));
+                break; 
+            }
+        }
+    }
+    
+    
+    public static void imprimirgastos(){
+        
+        JOptionPane.showMessageDialog(null,"El presupuesto inicial fue de "+presupuesto+" pesos colombianos \n"
+                + "Los gastos totales de cada categoría fueron: \n"
+                + "1.Comida: "+ gastos[1]
+                + "\n2.Transporte: "+ gastos[2]
+                + "\n3.Entradas: "+ gastos[3]
+                + "\n4.Regalos: "+ gastos[4]
+                + "\n5.Otros: "+ gastos[5]
+        +"\nEl gasto total fue: "+ suma()
+        +"\nQuedaste con sobre giro de: ");
+        JOptionPane.showMessageDialog(null,(presupuesto-suma()<0)?("en deuda"):("con dinero extra"));
+    }
+    
+    public static double suma(){
+        double suma;
+        suma=0;
+        for(int i=0;i<6;i++){
+            suma+=gastos[i];
+        }
+    return suma;
+    }
+}
