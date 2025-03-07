@@ -14,18 +14,14 @@ public class Ejercicio4 {
             int[][] matriz = new int[num1][num1];
     
             // Inicialización del array bidimensional
-            matriz[0][0] = 1;
-            matriz[0][1] = 2;
-            matriz[0][2] = 3;
-            matriz[0][3] = 4;
-            matriz[1][0] = 5;
-            matriz[1][1] = 6;
-            matriz[1][2] = 7;
-            matriz[1][3] = 8;
-            matriz[2][0] = 9;
-            matriz[2][1] = 10;
-            matriz[2][2] = 11;
-            matriz[2][3] = 12;
+           numeroRandom();
+            llenarMatriz(matriz);
+    
+            // Impresión del array bidimensional
+            System.out.println(imprimirMatriz(matriz));
+            JOptionPane.showMessageDialog(null, imprimirMatriz(matriz));
+            // 
+           imprimirMatriz(matriz);
     
             // Acceso a los elementos del array bidimensional
             for (int i = 0; i < matriz.length; i++) {
@@ -51,14 +47,13 @@ public static int personas(){
         }
         
 public static void llenarMatriz(int mat[][]) {
-    int num1=0;
-    num1 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el limite del valor random"));
+ 
 
     for (int i = 0; i < mat.length; i++) {
         for (int j = 0; j < mat[i].length; j++) {
            
             
-            mat[i][j]=numeroRandom(num1);
+            mat[i][j]=numeroRandom();
         }
     }
 }
@@ -82,12 +77,12 @@ matriz+="Filas: "+ mat.length + "\nColumnas: "+mat[1].length + "\n";
 
 }
 
-public static int numeroRandom(int limite){
+public static int numeroRandom() {
     int num1;
     num1=0;
     Random rand = new Random();
     
-        num1=rand.nextInt(limite);
+        num1=rand.nextInt(1);
     return num1;
 }
 
