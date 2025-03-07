@@ -21,10 +21,9 @@ public class Ejercicio5 {
         int mat[][]= new int[fila][columnas];
 
         
-        
-        scalar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el escalar")); 
         llenarMatriz(mat); 
         JOptionPane.showMessageDialog(null, imprimirMatriz(mat));
+        scalar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el escalar")); 
         multiplicarMatriz(mat, scalar);
         JOptionPane.showMessageDialog(null, imprimirMatriz(mat));
         
