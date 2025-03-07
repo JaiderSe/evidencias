@@ -1,6 +1,6 @@
-package semana3.cuatro;
+package semana4.tres;
 
-public class Ejercicio3 {
+public class Ejercicio1 {
     public static void main(String[] args) {
         
         int fila;

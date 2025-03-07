@@ -1,10 +1,10 @@
-package semana3.cuatro;
+package semana4.tres;
 
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-public class Ejercicio5 {
+public class Ejercicio3 {
 
 
     public static void main(String[] args) {

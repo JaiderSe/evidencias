@@ -1,8 +1,8 @@
-package semana3.cuatro;
+package semana4.tres;
 
 import javax.swing.JOptionPane;
 
-public class Ejercicio4 {
+public class Ejercicio2 {
 
     public static void main(String[] args) {
         
