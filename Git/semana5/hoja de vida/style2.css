@@ -1,0 +1,41 @@
+.header{
+    text-align: center;
+}
+
+.container{
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-left: 200px;
+    margin-right: 200px;   
+    padding: 20px;
+
+}
+p.section{
+    text-align: left;
+}
+
+.header img{
+    border-radius: 50%;
+    border: 2px solid #270808;
+    width: 100px;
+    height: auto;
+}
+
+body{
+    background-color: #bdbdbd;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.line{
+    border-bottom: 5px solid #333;
+    margin-bottom: 0px;
+}
+
+h1{
+    color: #333;
+    font-size: 20px;
+}
