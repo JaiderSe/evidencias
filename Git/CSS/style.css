@@ -1,12 +1,24 @@
-estilo_1 {
+h1 {
+    text-align: center;
+    color: red;
+    font-size: 100px;
+}
+
+img {
+    width: 35%;
+    height: auto;
+    margin: auto;
+    display: block;
+}
+
+.estilo_1 {
     color: blue;
     text-align: center;
     font-size: 200px;
 }
 
-juego {
-    color: green;
-    color: red;
+.juego {
+    color: rgb(31, 200, 223);
     text-align: center;
-    font-size: 200px;
+    font-size: 150px;
 }

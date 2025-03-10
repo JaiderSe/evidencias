@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(230, 1, 1);
+}
+.container{
+    background-color: beige;
+    color: black;
+    margin-right: 200px;
+    margin-left: 200px;
+    border: 10px solid black;
+    border-radius: 10px;
+}
+.titulo{
+    font-family: 'Shine in Valentine', cursive;
+    text-align: center;
+    color: red;
+    font-size: 100px;
+}
+p{
+    font-family: 'Shine in Valentine', cursive;
+    text-align: center;
+    color: blue;
+    font-size: 50px;
+}
+img{
+    width: 35%;
+    height: auto;
+    margin: auto;
+    display: block;
+}
