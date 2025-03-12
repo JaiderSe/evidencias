@@ -1,5 +1,7 @@
 package semana5.uno;
 
+import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 public class Ejercicio1 {
@@ -15,7 +17,9 @@ public class Ejercicio1 {
         double num1 =0;
         
         num1=Double.parseDouble(JOptionPane.showInputDialog(null, "Por favor digite su presupuesto inicial"));
+
         imprimirFactura(compraString(num1, productos, cantidades));
+        
 
         
    }
@@ -53,7 +57,8 @@ public class Ejercicio1 {
    public static String compraString(Double presupuesto, String [][] productos, int [] cantidades){
 
     String facturaString = "Producto \t Cantidad \t Precio \t Total\n";
-
+    
+    double total = presupuesto;
     int precio;
     int i=1;
             
@@ -78,7 +83,7 @@ public class Ejercicio1 {
                 if (i==0){
                     break;
                 }
-                
+
                 precio = Integer.parseInt(productos[i][1]);
                 cantidades[i] = Integer.parseInt(JOptionPane.showInputDialog(null, 
                 "Por favor digite la cantidad del producto  "+productos[i][0]+" = $"+productos[i][1]+" \nSu presupuesto es de: "+presupuesto));
@@ -97,6 +102,14 @@ public class Ejercicio1 {
 
             }while(i!=0);
 
+            total -= presupuesto;
+            facturaString += "   \n"+ "Sub total: "+total+ "\n"
+            + "   \n"+ "IVA "+total*0.19+"\n"
+            + "   \n"+ "Total "+total*1.19+"\n";
+
+            descuento(total);
+          
+
         return facturaString;
    }
 
@@ -104,6 +117,23 @@ public class Ejercicio1 {
    public static void imprimirFactura(String factura){
     JOptionPane.showMessageDialog(null, factura);
    }
+   
+   public static int descuento(double total){
+    
 
+    Random random = new Random();
+    int descuento = random.nextInt(1);
+    if (descuento==1){
+
+            total*=0.5;
+            JOptionPane.showMessageDialog(null, "felicitaciones ganó un descuento del 50%= $"+total);
+
+    }
+    else{
+            JOptionPane.showMessageDialog(null, "no tiene descuento");
+    }
+
+    return descuento;
+   }
 
 }
