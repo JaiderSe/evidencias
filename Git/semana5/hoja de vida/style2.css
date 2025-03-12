@@ -17,10 +17,11 @@ p.section{
 }
 
 .header img{
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 2px solid #270808;
-    width: 200px;
-    height: auto;
+    object-fit: cover;
 }
 
 body{
