@@ -55,9 +55,11 @@ public class Ejercicio1 {
    }
 
    public static String compraString(Double presupuesto, String [][] productos, int [] cantidades){
-
-    String facturaString = "Producto \t Cantidad \t Precio \t Total\n";
+    String nombre;
+    nombre = JOptionPane.showInputDialog("Nombre del Cliente:");
+    String facturaString = "Factura de compra\nCliente: " + nombre + "\n\nProducto  |  Cantidad  |  Precio  |  Subtotal ";
     
+
     double total = presupuesto;
     int precio;
     int i=1;
@@ -97,17 +99,21 @@ public class Ejercicio1 {
                 
                 }
                 else{
-                    facturaString += "   \n"+productos[i][0] + "\t " + cantidades[i] + "\t " + precio + "\t " + (precio * cantidades[i]) + "\n";
+                   
+                    facturaString += "   \n"+productos[i][0] + " | " + cantidades[i] + " | $" + precio + " | $" + (precio * cantidades[i]) + "\n";
                 }
 
             }while(i!=0);
 
             total -= presupuesto;
-            facturaString += "   \n"+ "Sub total: "+total+ "\n"
-            + "   \n"+ "IVA "+total*0.19+"\n"
-            + "   \n"+ "Total "+total*1.19+"\n";
 
-            descuento(total);
+            facturaString +=
+            "\n" + "Total: $" + total + "\n" +
+            "   \n"+ "IVA: $"+total*0.19+"\n"
+            + "   \n"+ "Total + IVA: $"+total*1.19+"\n"
+            + "   \n"+ "Descuento: $" + descuento(total) + "\n";
+
+     
           
 
         return facturaString;
@@ -118,19 +124,20 @@ public class Ejercicio1 {
     JOptionPane.showMessageDialog(null, factura);
    }
    
-   public static int descuento(double total){
+   public static double descuento(double total){
     
 
     Random random = new Random();
-    int descuento = random.nextInt(1);
+    int descuento = random.nextInt(2);
     if (descuento==1){
 
             total*=0.5;
-            JOptionPane.showMessageDialog(null, "felicitaciones ganó un descuento del 50%= $"+total);
-
+            JOptionPane.showMessageDialog(null, "felicitaciones ganó un descuento del 50% = $"+total);
+            return total;        
     }
+    
     else{
-            JOptionPane.showMessageDialog(null, "no tiene descuento");
+            JOptionPane.showMessageDialog(null, "no tiene descuento: \n");
     }
 
     return descuento;
