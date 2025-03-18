@@ -66,31 +66,31 @@
 
 }
 
-#slide ul li input#boton-1:checked~#foto01{
+#slide ul li input#boton-1:checked ~ #foto01{
 
     opacity: 1;
 
 }
 
-#slide ul li input#boton-1:checked~#foto02{
+#slide ul li input#boton-2:checked ~ #foto02{
 
     opacity: 1;
 
 }
 
-#slide ul li input#boton-1:checked~#foto03{
+#slide ul li input#boton-3:checked ~ #foto03{
 
     opacity: 1;
 
 }
 
-#slide ul li input#boton-1:checked~#foto04{
+#slide ul li input#boton-4:checked ~ #foto04{
 
     opacity: 1;
 
 }
 
-#slide ul li input#boton-1:checked~#foto05{
+#slide ul li input#boton-5:checked ~ #foto05{
 
     opacity: 1;
 
@@ -102,4 +102,39 @@
     width: 1000px;
     height: 26px;
     background:url(../img/backBotonesSlide.jpg) ;
+}
+
+/* Estilos para la cabecera */
+header {
+    background-color: #003333; /* Color de fondo de la cabecera */
+    height: 50px; /* Altura de la cabecera */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav {
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo del contenedor de navegación */
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around; /* Espacio entre los elementos del menú */
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    padding: 15px 20px; /* Espaciado interno de los enlaces */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    text-align: center;
+}
+
+nav ul li a:hover {
+    background-color: #005555; /* Color de fondo al pasar el ratón */
 }
