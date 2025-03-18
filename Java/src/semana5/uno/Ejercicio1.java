@@ -1,5 +1,7 @@
 package semana5.uno;
 
+import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 public class Ejercicio1 {
@@ -15,7 +17,9 @@ public class Ejercicio1 {
         double num1 =0;
         
         num1=Double.parseDouble(JOptionPane.showInputDialog(null, "Por favor digite su presupuesto inicial"));
+
         imprimirFactura(compraString(num1, productos, cantidades));
+        
 
         
    }
@@ -51,9 +55,12 @@ public class Ejercicio1 {
    }
 
    public static String compraString(Double presupuesto, String [][] productos, int [] cantidades){
+    String nombre;
+    nombre = JOptionPane.showInputDialog("Nombre del Cliente:");
+    String facturaString = "Factura de compra\nCliente: " + nombre + "\n\nProducto  |  Cantidad  |  Precio  |  Subtotal ";
+    
 
-    String facturaString = "Producto \t Cantidad \t Precio \t Total\n";
-
+    double total = presupuesto;
     int precio;
     int i=1;
             
@@ -78,7 +85,7 @@ public class Ejercicio1 {
                 if (i==0){
                     break;
                 }
-                
+
                 precio = Integer.parseInt(productos[i][1]);
                 cantidades[i] = Integer.parseInt(JOptionPane.showInputDialog(null, 
                 "Por favor digite la cantidad del producto  "+productos[i][0]+" = $"+productos[i][1]+" \nSu presupuesto es de: "+presupuesto));
@@ -92,10 +99,22 @@ public class Ejercicio1 {
                 
                 }
                 else{
-                    facturaString += "   \n"+productos[i][0] + "\t " + cantidades[i] + "\t " + precio + "\t " + (precio * cantidades[i]) + "\n";
+                   
+                    facturaString += "   \n"+productos[i][0] + " | " + cantidades[i] + " | $" + precio + " | $" + (precio * cantidades[i]) + "\n";
                 }
 
             }while(i!=0);
+
+            total -= presupuesto;
+
+            facturaString +=
+            "\n" + "Total: $" + total + "\n" +
+            "   \n"+ "IVA: $"+total*0.19+"\n"
+            + "   \n"+ "Total + IVA: $"+total*1.19+"\n"
+            + "   \n"+ "Descuento: $" + descuento(total) + "\n";
+
+     
+          
 
         return facturaString;
    }
@@ -104,6 +123,24 @@ public class Ejercicio1 {
    public static void imprimirFactura(String factura){
     JOptionPane.showMessageDialog(null, factura);
    }
+   
+   public static double descuento(double total){
+    
 
+    Random random = new Random();
+    int descuento = random.nextInt(2);
+    if (descuento==1){
+
+            total*=0.5;
+            JOptionPane.showMessageDialog(null, "felicitaciones ganó un descuento del 50% = $"+total);
+            return total;        
+    }
+    
+    else{
+            JOptionPane.showMessageDialog(null, "no tiene descuento: \n");
+    }
+
+    return descuento;
+   }
 
 }
