@@ -14,12 +14,6 @@ public class Circulo {
                 this.radio = radio;
             }
 
-            // Método toString
-            @Override
-            public String toString() {
-                return "Circulo [radio=" + radio + "]";
-            }
-
             // Método para cambiar el radio
             public void setRadio(double radio) {
                 this.radio = radio;
@@ -39,6 +33,12 @@ public class Circulo {
             public double calcularPerimetro() {
                 return 2 * Math.PI * radio;
             }
+            
+             // Método toString
+             @Override
+             public String toString() {
+                 return "Circulo [radio=" + radio + "]";
+             }
         }
 
        
