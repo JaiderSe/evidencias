@@ -8,7 +8,7 @@ public class Ejercicio1 {
 
     public static void main(String[] args) {
 
-        Persona      obj1=  new       Persona();
+        Persona obj1=  new Persona();
     //  tipo de dato objeto operador  metodo
         
     obj1.setNombre("hola");
