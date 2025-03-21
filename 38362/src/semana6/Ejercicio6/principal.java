@@ -1,6 +1,6 @@
 package semana6.Ejercicio6;
 
-public class principal {
+public class Principal {
     public static void main(String[] args) {
          
             // Crear instancia con constructor por defecto
