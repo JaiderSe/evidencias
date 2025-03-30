@@ -1,4 +1,4 @@
-package semana6.Ejercicio6;
+package semana6.tres.Ejercicio6;
 
 public class Circulo {
         

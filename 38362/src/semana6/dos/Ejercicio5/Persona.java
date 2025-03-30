@@ -1,5 +1,4 @@
-package semana6.Ejercicio5;
-
+package semana6.dos.Ejercicio5;
 public class Persona {
     private String nombre;
     private int edad;

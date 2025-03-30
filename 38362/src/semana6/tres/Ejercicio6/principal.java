@@ -1,8 +1,8 @@
-package semana6.Ejercicio6;
+package semana6.tres.Ejercicio6;
+import semana6.tres.Ejercicio6.Circulo;
 
 
-
-public class Principal {
+public class principal {
     public static void main(String[] args) {
          
             // Crear instancia con constructor por defecto

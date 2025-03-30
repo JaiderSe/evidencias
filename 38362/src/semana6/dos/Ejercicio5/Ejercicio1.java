@@ -1,4 +1,4 @@
-package semana6.Ejercicio5;
+package semana6.dos.Ejercicio5;
 
 import javax.swing.JOptionPane;
 
