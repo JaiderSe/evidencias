@@ -38,6 +38,8 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
+
+
 @media (max-width: 1024px) {
     .caja {
         height: 180px;
