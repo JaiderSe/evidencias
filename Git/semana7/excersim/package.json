@@ -1,0 +1,30 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "Jordi Ayala",
+  "license": "ISC",
+  "scripts": {
+    "dev": "nodemon src/medium/ex-008.js",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json",
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true,
+      "jest": true
+    }
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.21",
+    "standard": "^17.0.0"
+  }
+}
