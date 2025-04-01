@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+#acordeon input{
+    display: none;
+}
+
+#acordeon label{
+    display: block;
+    width: 100%;
+    line-height: 80px;
+    text-align: center;
+    background: #ccc;
+    border: 1px solid #555;
+    cursor: pointer;
+}
+
+#acordeon h1{
+    padding: 5%;
+}
+
+#acordeon img{
+    padding: 0% 5%;
+}
+
+#acordeon p{
+    width: 90%;
+    padding: 5%;
+    text-align: justify;
+}
+
+#acordeon div{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    transition: height .5s;
+}
+
+input#bloque1:checked ~ #cont1{
+    height: auto;
+} 
+
+input#bloque2:checked ~ #cont2{
+    height: auto;
+} 
+
+input#bloque3:checked ~ #cont3{
+    height: auto;
+} 
