@@ -22,8 +22,7 @@ public abstract  class figuras {
         System.out.println("\nEl perímetro del " + figura4.tipoFigura() + " es: " + figura4.perimetro());
 
         figuras figura5 = new cilindro_hueco(5, 10, 2);
-        System.out.println("\nEl área del " + figura5.tipoFigura() + " es: " + figura5.area());
-        System.out.println("\nEl perímetro del " + figura5.tipoFigura() + " es: " + figura5.perimetro());
+        
 
     }
     public figuras() {
