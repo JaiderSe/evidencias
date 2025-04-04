@@ -13,6 +13,18 @@ public abstract  class figuras {
         System.out.println("\nEl área del " + figura2.tipoFigura() + " es: " + figura2.area());
         System.out.println("\nEl perímetro del " + figura2.tipoFigura() + " es: " + figura2.perimetro());
         
+        figuras figura3 = new cilindro(5, 10);
+        System.out.println("\nEl área del " + figura3.tipoFigura() + " es: " + figura3.area());
+        System.out.println("\nEl perímetro del " + figura3.tipoFigura() + " es: " + figura3.perimetro());
+
+        figuras figura4 = new circulo(5);
+        System.out.println("\nEl área del " + figura4.tipoFigura() + " es: " + figura4.area());
+        System.out.println("\nEl perímetro del " + figura4.tipoFigura() + " es: " + figura4.perimetro());
+
+        figuras figura5 = new cilindro_hueco(5, 10, 2);
+        System.out.println("\nEl área del " + figura5.tipoFigura() + " es: " + figura5.area());
+        System.out.println("\nEl perímetro del " + figura5.tipoFigura() + " es: " + figura5.perimetro());
+
     }
     public figuras() {
         // Constructor vacío

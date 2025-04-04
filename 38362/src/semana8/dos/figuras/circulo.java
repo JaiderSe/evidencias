@@ -23,7 +23,12 @@ public class circulo extends figuras {
         return 2 * radio*Math.PI;
     }
 
-
+    public double setPerimetro(double perimetro) {
+        if (perimetro < 0) {
+            throw new IllegalArgumentException("El perímetro no puede ser negativo.");
+        }
+        return perimetro;
+    }
     
     @Override
     public double area() {
