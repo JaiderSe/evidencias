@@ -12,7 +12,21 @@ public class cilindro extends figuras {
         return radio;
     }
 
+    public void setRadio(double radio) {
+        if (radio < 0) {
+            throw new IllegalArgumentException("El radio no puede ser negativo.");
+        }
+        this.radio = radio;
+    }
+
     public double getAltura() {
+        return altura;
+    }
+
+    public double setAltura(double altura) {
+        if (altura < 0) {
+            throw new IllegalArgumentException("La altura no puede ser negativa.");
+        }
         return altura;
     }
 

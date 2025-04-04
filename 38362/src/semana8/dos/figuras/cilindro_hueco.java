@@ -7,6 +7,18 @@ public class cilindro_hueco extends cilindro {
         this.radioInterno = radioInterno;
     }
     
+    public double getRadioInterno() {
+        return radioInterno;
+    }
+
+    public double setRadioInterno(double radioInterno) {
+        if (radioInterno < 0) {
+            throw new IllegalArgumentException("El radio interno no puede ser negativo.");
+        }
+        return radioInterno;
+    }
+
+
     @Override
     public double area() {
         return 2 * Math.PI * (super.getRadio() + radioInterno) * (super.getAltura() + super.getRadio() - radioInterno);

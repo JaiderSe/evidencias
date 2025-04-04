@@ -5,6 +5,17 @@ public class cuadrado extends figuras {
     public cuadrado(double lado) {
         this.lado = lado;
     }
+
+    public double getLado() {
+        return lado;
+    }
+
+    public void setLado(double lado) {
+        if (lado < 0) {
+            throw new IllegalArgumentException("El lado no puede ser negativo.");
+        }
+        this.lado = lado;
+    }
     
     @Override
     public double area() {
