@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nuestros Productos</h1>
+        <nav>
+            <span id="userGreeting"></span>
+            <button id="logoutBtn">Cerrar sesión</button>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="products-section">
+            <h2>Catálogo Disponible</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Productos se cargarán aquí -->
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar autenticación
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                window.location.href = '../../index.html';
+                return;
+            }
+            
+            // Mostrar información del usuario
+            document.getElementById('userGreeting').textContent = `Bienvenido, ${currentUser.name}`;
+            
+            // Cargar productos
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const productsGrid = document.getElementById('productsGrid');
+            
+            if (products.length === 0) {
+                productsGrid.innerHTML = '<p>No hay productos disponibles.</p>';
+            } else {
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <p class="price">$${product.price.toFixed(2)}</p>
+                        <p>Stock: ${product.stock}</p>
+                        <button class="add-to-cart" data-id="${product.id}">Añadir al carrito</button>
+                    `;
+                    productsGrid.appendChild(productCard);
+                });
+            }
+            
+            // Cerrar sesión
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                window.location.href = '../login.html';
+            });
+        });
+    </script>
+</body>
+</html>

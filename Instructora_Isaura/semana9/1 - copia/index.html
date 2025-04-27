@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Entrevista</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="text">
+  <h1 id="miParrafo">Este es un párrafo que cambiará de color.</h1>
+    
+    <button id="boton">Cambiar color</button>
+</div>
+    <form id="form-entrevista">
+        <label for="puesto">¿Qué puesto te interesa?</label>
+        <select id="puesto" name="puesto">
+          <option value="desarrollador">Desarrollador Frontend</option>
+          <option value="disenador">Diseñador UX/UI</option>
+          <option value="otro">Otro (especificar)</option>
+        </select>
+      
+        <!-- Textarea que solo aparece si se elige "Otro" -->
+        <div id="campo-otro" class="hidden">
+          <label for="especificar">Por favor, especifica:</label>
+          <textarea id="especificar" name="especificar"></textarea>
+        </div>
+      
+        <button type="submit">Enviar</button>
+    </form>    
+
+    <script>
+        const selectPuesto = document.getElementById("puesto");
+        const campoOtro = document.getElementById("campo-otro");
+
+        selectPuesto.addEventListener("change", function() {
+          // Verificamos si la opción seleccionada es "Otro"
+          if (this.value === "otro") {
+            campoOtro.classList.remove("hidden"); // Muestra el textarea
+          } else {
+            campoOtro.classList.add("hidden"); // Oculta el textarea
+          }
+        });
+
+
+
+        const boton = document.getElementById("boton");
+        const parrafo = document.getElementById("miParrafo");
+
+        // Función para cambiar el color del párrafo
+        boton.addEventListener("click", function() {
+            const colores = ["#FF5733", "#33FF57", "#3357FF", "#F3FF33", "#FF33A6"];
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            parrafo.style.transition = "color 0.1s"; // Animación suave
+            parrafo.style.color = colorAleatorio;
+        });
+
+    </script>
+</body>
+</html>

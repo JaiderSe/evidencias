@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <form id="loginForm">
+            <h2>Iniciar Sesión</h2>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Ingresar</button>
+            <p class="auth-link">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+        </form>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Obtener usuarios registrados
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Buscar usuario
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Guardar usuario actual en sesión
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Redirigir según rol
+                if (user.role === 'admin') {
+                    window.location.href = './admin/dashboard.html';
+                } else {
+                    window.location.href = './cliente/productos.html';
+                }
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        });
+    </script>
+</body>
+</html>

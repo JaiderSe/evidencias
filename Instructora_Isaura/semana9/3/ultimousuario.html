@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="username" placeholder="Tu nombre">
+    <button id="saveName">Guardar</button>
+    <p id="greeting"></p>
+
+    <script>
+        const usernameInput = document.getElementById("username");
+        const greeting = document.getElementById("greeting");
+
+        // 1. Al cargar la página, mostrar el nombre guardado
+        const savedName = localStorage.getItem("username");
+        if (savedName) {
+            greeting.textContent = `¡Hola de nuevo, ${savedName}!`;
+        }
+
+        // 2. Guardar nuevo nombre
+        document.getElementById("saveName").addEventListener("click", () => {
+            const name = usernameInput.value;
+            localStorage.setItem("username", name);
+            greeting.textContent = `¡Hola, ${name}!`;
+        });
+    </script>
+</body>
+</html>

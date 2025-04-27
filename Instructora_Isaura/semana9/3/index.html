@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="draft" placeholder="Escribe aquí..."></textarea>
+
+    <script>
+        const textarea = document.getElementById("draft");
+
+        // 1. Cargar texto guardado (si existe)
+            textarea.value = localStorage.getItem("savedDraft") || "";
+
+        // 2. Guardar cambios automáticamente
+            textarea.addEventListener("input", () => {
+                localStorage.setItem("savedDraft", textarea.value);
+            });
+
+        // Opcional: Botón para borrar el draft
+            document.getElementById("clearDraft").addEventListener("click", () => {
+                localStorage.removeItem("savedDraft");
+                textarea.value = "";
+            });
+    </script>
+</body>
+</html>
+

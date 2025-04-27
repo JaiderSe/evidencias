@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar color del párrafo</title>
+</head>
+<body>
+    <p id="miParrafo">Este es un párrafo que cambiará de color.</p>
+    <button id="boton">Cambiar color</button>
+<p>
+    <script>
+        // Obtener el botón y el párrafo
+        const boton = document.getElementById("boton");
+        const parrafo = document.getElementById("miParrafo");
+
+        // Función para cambiar el color del párrafo
+        boton.addEventListener("click", function() {
+            const colores = ["#FF5733", "#33FF57", "#3357FF", "#F3FF33", "#FF33A6"];
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            parrafo.style.transition = "color 0.1s"; // Animación suave
+            parrafo.style.color = colorAleatorio;
+        });
+    </script>
+</body>
+</html>

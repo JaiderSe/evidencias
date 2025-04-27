@@ -1,0 +1,17 @@
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+body.dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+#themeToggle {
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 20px;
+}

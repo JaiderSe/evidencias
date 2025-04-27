@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+        <nav>
+            <span id="userGreeting"></span>
+            <button id="logoutBtn">Cerrar sesión</button>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="admin-section">
+            <h2>Bienvenido, Administrador</h2>
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Total de Usuarios</h3>
+                    <p id="totalUsers">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Productos Registrados</h3>
+                    <p id="totalProducts">0</p>
+                </div>
+            </div>
+            
+            <h3>Últimos Usuarios Registrados</h3>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="../../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar autenticación y rol
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser || currentUser.role !== 'admin') {
+                window.location.href = '../../index.html';
+                return;
+            }
+            
+            // Mostrar información del usuario
+            document.getElementById('userGreeting').textContent = `Bienvenido, ${currentUser.name}`;
+            
+            // Cargar datos de administración
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalProducts').textContent = products.length;
+            
+            // Mostrar últimos usuarios
+            const usersTable = document.querySelector('#usersTable tbody');
+            const lastUsers = users.slice(-5).reverse(); // Últimos 5 registrados
+            
+            lastUsers.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                `;
+                usersTable.appendChild(row);
+            });
+            
+            // Cerrar sesión
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                window.location.href = '../login.html';
+            });
+        });
+    </script>
+</body>
+</html>
