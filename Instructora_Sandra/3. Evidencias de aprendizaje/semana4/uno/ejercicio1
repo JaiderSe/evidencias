@@ -1,0 +1,34 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package instagram;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Ambiente
+ */
+public class Instagram {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        int [] seguidores = new int [7]; 
+        String [] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"}; 
+        int total=0;
+    
+        for(int i=0;i<7;i++){
+            seguidores[i]=Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos seguidores ganaste el dia "+dias[i]+"?"));
+            total+=seguidores[i];
+        }
+        
+        JOptionPane.showMessageDialog(null,"Esta semana ganaste "+total+" seguidores");
+        // TODO code application logic here
+    }
+    
+    
+}
