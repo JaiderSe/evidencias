@@ -1,0 +1,5 @@
+Hora= int(input("Ingrese la hora:"))
+Minutos= (Hora*60)
+Segundos= (Minutos*60)
+print (Hora,"Horas es igual a: ", Minutos, "Minutos")
+print (Hora,"Horas es igual a: ", Segundos,"Segundos")

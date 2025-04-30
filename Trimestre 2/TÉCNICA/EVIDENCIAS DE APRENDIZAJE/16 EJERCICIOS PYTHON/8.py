@@ -1,0 +1,5 @@
+Producto = int(input("Ingrese el valor de mi producto: "))
+Iva = int(input("Ingrese el valor del iva: "))
+Iva2 = int((Iva / 100) * Producto)
+Resultado=(Iva2+Producto)
+print ("Valor neto ", Resultado)
