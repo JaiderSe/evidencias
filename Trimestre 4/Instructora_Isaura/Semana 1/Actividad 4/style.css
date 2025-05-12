@@ -1,0 +1,30 @@
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col {
+    border: 1px;
+    padding: 12px;
+    border-color: rgb(255, 255, 255);
+    background-color: rgb(239, 221, 255);
+
+}
+.container .row>.col, .container .row>[class^=col-]
+ {
+    min-height: 10rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(86, 61, 124, .15);
+    border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.contaider .row {
+    min-height: 10rem;
+    background-color: rgba(255, 0, 0, .1);
+}
