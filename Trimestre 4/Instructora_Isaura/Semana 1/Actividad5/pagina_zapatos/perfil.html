@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Zapatería Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Zapatería<span>Online</span></h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="indexusuario.html">Inicio</a></li>
+                <li><a href="#">Hombres</a></li>
+                <li><a href="#">Mujeres</a></li>
+                <li><a href="#">Niños</a></li>
+                <li><a href="#">Ofertas</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <div class="user-dropdown">
+                <span id="welcome-user">Bienvenido, <span id="user-name">Usuario</span></span>
+                <div class="dropdown-content">
+                    <a href="perfil.html">Mi perfil</a>
+                    <a href="#" id="logout">Cerrar sesión</a>
+                </div>
+            </div>
+            <a href="#" class="cart-icon">🛒</a>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <h2>Mi Perfil</h2>
+        <div class="profile-info">
+            <div class="profile-details">
+                <h3 id="profile-name">Nombre de Usuario</h3>
+                <p id="profile-email">correo@ejemplo.com</p>
+                <button id="edit-profile" class="btn">Editar perfil</button>
+            </div>
+            <div class="profile-orders">
+                <h3>Mis Pedidos</h3>
+                <p>No tienes pedidos recientes</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2023 Zapatería Online. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser) {
+                document.getElementById('profile-name').textContent = currentUser.name;
+                document.getElementById('profile-email').textContent = currentUser.email;
+                document.getElementById('user-name').textContent = currentUser.name;
+            } else {
+                window.location.href = 'index.html';
+            }
+            
+            // Cerrar sesión
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
