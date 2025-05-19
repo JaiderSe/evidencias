@@ -1,0 +1,12 @@
+.row{
+    background-color: #f0f8ff;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+.row>[class^="col"]{
+    border: 2px solid #007bff;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+}
