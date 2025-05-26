@@ -1,0 +1,31 @@
+*{
+    margin-left: 20px;
+    padding: 0;
+}
+
+.row{
+    background-color: antiquewhite;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px;
+}
+
+[class*="col-"]{
+    background-color: aqua;
+    border: 2px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.row>.col, .row>[class^=col-]
+ {
+    min-height: 10rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(86, 61, 124, .15);
+    border: 1px solid rgba(86, 61, 124, .2);
+}
+
+
+
