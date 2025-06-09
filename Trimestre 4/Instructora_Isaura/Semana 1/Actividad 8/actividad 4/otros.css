@@ -1,0 +1,64 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.album-detail {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.album-cover {
+  width: 100%;
+  max-width: 300px;
+  object-fit: cover;
+}
+
+.album-info {
+  padding: 20px;
+  flex: 1;
+}
+
+.album-info h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.album-info p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.back-link a:hover {
+  color: #0056b3;
+}
