@@ -1,0 +1,127 @@
+======================================================
+DDL
+========================================
+crear base de datos:
+create database matricula_universitaria;
+
+usar base de datos:
+use matricula_universitaria;
+
+crear tabla estudiante:
+CREATE TABLE Estudiante(
+	id_Estudiante int not null,
+	nombreEstudiante varchar(20) not null,
+    carrera varchar(20),
+    genero varchar(20),
+    fechaNacimientoEstudiante date ,
+    materias varchar(200),
+    semestre int,
+    año_academico date,
+    estado_de_matricula varchar(20),
+    fecha_limite_de_pago date,
+    primary key(id_Estudiante)
+    
+);
+
+crear tabla Asignatura:
+CREATE TABLE Asignatura(
+	id_Asignatura int not null,
+    nombre_Asignatura varchar(20) not null,
+    creditos_Asociados double not null,
+    primary key(id_Asignatura)
+    
+);
+
+crear tabla Matricula:
+CREATE TABLE matricula(
+	id_Matricula int auto_increment,
+	id_Estudiante_FK int,
+    id_Asignatura_FK int,
+    
+    primary key(id_Matricula) , 
+    foreign key(id_Estudiante_FK) references estudiante(id_Estudiante),
+    foreign key(id_Asignatura_FK) references asignatura(id_Asignatura)
+    
+);
+
+====================================================================
+DML
+=====================================================================
+
+
+
+
+Registros de la tabla Estudiante:
+
+
+INSERT INTO Estudiante (id_Estudiante, nombre_Estudiante, carrera, genero, fechaNacimientoEstudiante, materias, semestre, año_academico, estado_de_matricula, fecha_limite_de_pago) VALUES
+(1, 'Ana García', 'Ingeniería', 'Femenino', '2003-04-22', 'Cálculo, Física', 1, '2024-08-01', 'Pendiente', '2024-07-31'),
+(2, 'Luis Martínez', 'Medicina', 'Masculino', '2002-09-15', 'Anatomía, Bioquímica', 2, '2024-08-01', 'Activo', '2024-07-31'),
+(3, 'María Pérez', 'Arquitectura', 'Femenino', '2004-01-10', 'Diseño, Historia', 1, '2024-08-01', 'Inactivo', '2024-07-31'),
+(4, 'Carlos Sánchez', 'Derecho', 'Masculino', '2001-11-05', 'Civil, Penal', 3, '2024-08-01', 'Activo', '2024-07-31'),
+(5, 'Laura Ramírez', 'Economía', 'Femenino', '2003-06-18', 'Microeconomía, Macroeconomía', 2, '2024-08-01', 'Activo', '2024-07-31'),
+(6, 'Javier López', 'Psicología', 'Masculino', '2002-08-24', 'Psicología Clínica, Psicología Social', 4, '2024-08-01', 'Activo', '2024-07-31'),
+(7, 'Sofía Díaz', 'Comunicación', 'Femenino', '2004-03-01', 'Periodismo, Audiovisual', 1, '2024-08-01', 'Pendiente', '2024-07-31'),
+(8, 'Andrés Torres', 'Ingeniería', 'Masculino', '2001-12-12', 'Cálculo, Física', 3, '2024-08-01', 'Activo', '2024-07-31'),
+(9, 'Valentina Vargas', 'Medicina', 'Femenino', '2003-07-08', 'Anatomía, Bioquímica', 2, '2024-08-01', 'Inactivo', '2024-07-31'),
+(10, 'Diego Flores', 'Arquitectura', 'Masculino', '2002-10-20', 'Diseño Arquitectónico, Historia', 4, '2024-08-01', 'Activo', '2024-07-31'),
+(11, 'Isabela Ruiz', 'Derecho', 'Femenino', '2004-02-28', 'Civil, Penal', 1, '2024-08-01', 'Inactivo', '2024-07-31'),
+(12, 'Santiago Castro', 'Economía', 'Masculino', '2001-11-18', 'Microeconomía, Macroeconomía', 3, '2024-08-01', 'Activo', '2024-07-31'),
+(13, 'Camila Ortiz', 'Psicología', 'Femenino', '2003-09-05', 'Psicología Clínica, Psicología Social', 2, '2024-08-01', 'Activo', '2024-07-31'),
+(14, 'Sebastián Peña', 'Comunicación', 'Masculino', '2002-07-14', 'Periodismo, Producción Audiovisual', 4, '2024-08-01', 'Activo', '2024-07-31'),
+(15, 'Daniela Ríos', 'Medicina', 'Femenino', '2004-01-25', 'Enfermería Básica', 1, '2024-08-01', 'Pendiente', '2024-07-31');
+
+
+Registros de la tabla Asignatura
+INSERT INTO Asignatura (id_Asignatura, nombre_Asignatura, creditos_Asociados) VALUES
+(201, 'Cálculo I', 4.5),
+(202, 'Física I', 4.0),
+(203, 'Anatomía Humana', 5.0),
+(204, 'Bioquímica', 4.5),
+(205, 'Diseño Arquitectónico', 5.5),
+(206, 'Historia del Arte', 3.5),
+(207, 'Derecho Civil', 4.0),
+(208, 'Derecho Penal', 4.0),
+(209, 'Microeconomía', 4.0),
+(210, 'Macroeconomía', 4.0),
+(211, 'Psicología Clínica', 4.5),
+(212, 'Psicología Social', 3.5),
+(213, 'Periodismo', 4.0),
+(214, 'Producción Audiovisual', 4.5),
+(215, 'Enfermería Básica', 4.0);
+
+
+
+Registros de la tabla Matricula
+INSERT INTO Matricula (id_Estudiante_FK, id_Asignatura_FK) VALUES
+(1, 201),
+(1, 202),
+(2, 202),
+(2, 203),
+(3, 205),
+(3, 206),
+(4, 207),
+(4, 208),
+(5, 209),
+(5, 210),
+(6, 211),
+(6, 212),
+(7, 213),
+(7, 214),
+(8, 201),
+(8, 202),
+(9, 202),
+(9, 203),
+(10, 205),
+(10, 206),
+(11, 207),
+(11, 208),
+(12, 209),
+(12, 210),
+(13, 211),
+(13, 212),
+(14, 213),
+(14, 214),
+(15, 215);
+
+
