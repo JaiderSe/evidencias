@@ -1,0 +1,51 @@
+:root{
+    --primary:#db4809;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+   
+}
+
+.navbar{
+    min-height: 70px;
+}
+
+.navbar .btn{
+    padding: .625rem 1.25rem !important;
+}
+
+.btn{
+    padding: 1rem;
+}
+
+.btn-primary{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover{
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.text-primary{
+    color: var(--primary) !important;
+}
+
+.bg-primary{
+    background-color: var(--primary) !important; 
+}
+
+.content{
+    max-width: 500px;
+}
+
+#firt{
+    height: 900px;
+}
+
+@media (max-width:992px){
+    .navbar{
+        position: relative !important;
+    }
+}

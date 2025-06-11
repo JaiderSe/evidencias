@@ -1,0 +1,20 @@
+*{
+    margin-left: 20px;
+    padding: 0;
+}
+.col-sm-9{
+    background-color: rgb(255, 201, 131);
+    border: 2px solid #00000000;
+    padding: 15px;
+
+}
+.col-8, .col-sm-6,.col-4, .col-sm-6 {
+    background-color:antiquewhite;
+    border: 5px #0000;
+    margin-top:10px;
+    padding: 15px ;
+    box-sizing: border-box;
+    margin:0px
+
+}
+
