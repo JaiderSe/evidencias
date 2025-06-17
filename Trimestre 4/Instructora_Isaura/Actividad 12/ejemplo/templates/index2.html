@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapatería Online - Inicio</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>Zapatería<span>Online</span></h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Hombres</a></li>
+                <li><a href="#">Mujeres</a></li>
+                <li><a href="#">Niños</a></li>
+                <li><a href="#">Ofertas</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="login.html" class="login-icon">👤</a>
+            <a href="#" class="cart-icon">🛒</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Slider de productos destacados -->
+        <section class="slider">
+            <div class="slide active">
+                <img src="img/slide1.jpg" alt="Zapatos deportivos">
+                <div class="slide-content">
+                    <h2>Colección Deportiva 2023</h2>
+                    <p>Hasta 40% de descuento</p>
+                    <a href="#" class="btn">Comprar ahora</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/slide2.jpg" alt="Zapatos formales">
+                <div class="slide-content">
+                    <h2>Elegancia para toda ocasión</h2>
+                    <p>Nueva colección de otoño</p>
+                    <a href="#" class="btn">Ver colección</a>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev">❮</button>
+                <button class="next">❯</button>
+            </div>
+        </section>
+
+        <!-- Productos destacados -->
+        <section class="featured-products">
+            <h2>Productos Destacados</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/product1.jpg" alt="Zapatos deportivos">
+                    <h3>Zapatos Running Pro</h3>
+                    <p class="price">$89.99</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/product2.jpg" alt="Zapatos casuales">
+                    <h3>Mocasines Elegantes</h3>
+                    <p class="price">$59.99</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/product3.jpg" alt="Zapatos de vestir">
+                    <h3>Oxford Clásico</h3>
+                    <p class="price">$79.99</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </div>
+                <div class="product-card">
+                    <img src="img/product4.jpg" alt="Sandalias">
+                    <h3>Sandalias Comfort</h3>
+                    <p class="price">$39.99</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </div>
+            </div>
+
+            <h1>Datos de la base de datos</h1>
+            <table border="1">
+     <thead>
+            <tr>
+                <th>Columna 1</th>
+            </tr>
+     </thead>
+  <tbody>
+            {% for fila in datos %}
+            <tr>
+                <td>{{ fila[0] }}</td>
+                <td>{{ fila[1] }}</td>
+                <!-- Agrega más columnas según la cantidad de datos -->
+            </tr>
+            {% endfor %}
+  </tbody>
+      </table>
+
+        </section>
+
+        
+    
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <p>La mejor selección de zapatos online desde 2010.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>info@zapateriaonline.com</p>
+                <p>+1 234 567 890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-icons">
+                    <a href="#">📱</a>
+                    <a href="#">📷</a>
+                    <a href="#">💻</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Zapatería Online. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+
