@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Perfil de {{ user.name }}</h1>
+    <p>Email: {{ user.email }}</p>
+    <p>Role ID: {{ user.role_id }}</p>
+    <p><a href="{{ url_for('user_bp.login')}}">Logout</a></p>
+    <p><a href="{{ url_for('main_bp.home')}}">Back to Home</a></p>
+</body>
+</html>

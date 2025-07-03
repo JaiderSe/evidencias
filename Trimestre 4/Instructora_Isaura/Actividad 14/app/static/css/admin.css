@@ -1,0 +1,43 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.bg-primary {
+    background-color: #007bff !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.nav-link {
+    padding: 10px 0;
+}
+
+.btn-danger {
+    width: 100%;
+    padding: 10px;
+}
+
+.profile img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+

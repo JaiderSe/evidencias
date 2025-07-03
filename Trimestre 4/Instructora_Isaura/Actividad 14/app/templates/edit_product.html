@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Producto</h2>
+        <form action="{{ url_for('admin_bp.edit_product', product_id=product['id']) }}" method="post">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" value="{{ product['name'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" required>{{ product['description'] }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Precio:</label>
+                <input type="number" id="price" name="price" value="{{ product['price'] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="category_id">Categoría:</label>
+                <select id="category_id" name="category_id" required>
+                    {% for category in categories %}
+                        <option value="{{ category['id'] }}" {% if category['id'] == product['category_id'] %}selected{% endif %}>{{ category['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image_url">URL de Imagen:</label>
+                <input type="text" id="image_url" name="image_url" value="{{ product['image_url'] }}" required>
+            </div>
+            <button type="submit">Guardar Cambios</button>
+        </form>
+        <form action="{{ url_for('admin_bp.delete_product', product_id=product['id']) }}" method="post">
+            <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+        </form>
+        <a href="{{ url_for('admin_bp.products') }}">Regresar a la Lista de Productos</a>
+    </div>
+</body>
+</html>

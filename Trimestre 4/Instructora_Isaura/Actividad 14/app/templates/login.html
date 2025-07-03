@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('user_bp.login') }}">
+        <label>Email</label>
+        <input type="email" name="email" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

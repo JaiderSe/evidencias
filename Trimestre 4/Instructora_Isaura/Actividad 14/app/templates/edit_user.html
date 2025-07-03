@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Editar Usuario</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Rol</label>
+            <select class="form-control" id="role" name="role" required>
+                {% for role in roles %}
+                <option value="{{ role.id }}" {% if role.id == user.role_id %}selected{% endif %}>{{ role.role_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Modificar Usuario</button>
+    </form>
+</div>
+{% endblock %}
+

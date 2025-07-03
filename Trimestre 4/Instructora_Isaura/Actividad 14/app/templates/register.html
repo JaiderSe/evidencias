@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="post" action="{{ url_for('user_bp.register') }}" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            {% for role in roles %}
+                <option value="{{ role.id }}">{{ role.role_name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="photo">Profile Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+        
+        <button type="submit">Register</button>
+    </form>
+    <p><a href="{{ url_for('user_bp.login') }}">Already have an account? Login here.</a></p>
+</body>
+</html>
+
+

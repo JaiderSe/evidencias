@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('admin_bp.admin_dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('admin_bp.manage_users') }}">Gestión de Usuarios</a></li>
+                    <li><a href="{{ url_for('admin_bp.manage_clients') }}">Gestión de Clientes</a></li>
+                    <li><a href="{{ url_for('admin_bp.categories') }}" class="active">Gestión de Categorías</a></li>
+                    <li><a href="{{ url_for('admin_bp.products') }}">Gestión de Productos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <h1>Gestión de Categorías</h1>
+            <a href="{{ url_for('admin_bp.create_category') }}" class="btn">Crear Categoría</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.description }}</td>
+                        <td>
+                            <a href="#" class="btn">Modificar</a>
+                            <a href="#" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
