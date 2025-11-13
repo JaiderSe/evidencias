@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restausync - Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Restausync</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Menú</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-light py-5 text-center">
+        <h1 class="display-4">Reserva tu Mesa</h1>
+        <p class="lead">¡Asegura tu lugar y disfruta en familia!</p>
+    </header>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4>Formulario de Reservas</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre completo</label>
+                                <input type="text" class="form-control" id="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="hora" class="form-label">Hora</label>
+                                <input type="time" class="form-control" id="hora" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="personas" class="form-label">Número de personas</label>
+                                <select class="form-select" id="personas" required>
+                                    <option value="" selected disabled>Selecciona</option>
+                                    <option>2</option>
+                                    <option>4</option>
+                                    <option>6</option>
+                                    <option>8</option>
+                                    <option>10+</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comentarios" class="form-label">Comentarios (opcional)</label>
+                                <textarea class="form-control" id="comentarios" rows="2"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Reservar Ahora</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="alert alert-success mt-4 d-none" id="reservaExitosa" role="alert">
+                    ¡Reserva realizada con éxito! Te esperamos en Restausync.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white text-center py-3">
+        &copy; 2024 Restausync. Todos los derechos reservados.
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simulación de envío de formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('reservaExitosa').classList.remove('d-none');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

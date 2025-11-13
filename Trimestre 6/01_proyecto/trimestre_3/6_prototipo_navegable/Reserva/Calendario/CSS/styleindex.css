@@ -1,0 +1,81 @@
+@import url(../../../Inicio/css/menu.css);
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    background-color: #22090b ;
+    color: #000000;
+    padding: 30px;
+    
+  }
+
+  h1 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+    text-align: center;
+    
+  }
+
+  form {
+    max-width: 500px;
+    margin: 90px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: slideUp 1s ease-in-out;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  button {
+    background-color: #8C0303;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #6e2027;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: #ffffff;
+  }
+
+  

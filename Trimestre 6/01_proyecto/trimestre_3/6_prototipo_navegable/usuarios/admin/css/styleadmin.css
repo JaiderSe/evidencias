@@ -1,0 +1,88 @@
+@import url(../../../Inicio/css/menu.css);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: #22090b ;
+}
+
+.form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 90px 70px;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #797979;
+}
+
+th {
+  background-color: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+tr:hover {
+  background-color: #dad9d9;
+}
+
+button {
+  background-color: #8C0303;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #6e2027;
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px; /* Aumenta el tamaño */
+    color: white;      /* Cambia el color a blanco */
+    background-color: transparent; /* Opcional: fondo más visible */
+    padding: 20px;
+  }
+  
+  

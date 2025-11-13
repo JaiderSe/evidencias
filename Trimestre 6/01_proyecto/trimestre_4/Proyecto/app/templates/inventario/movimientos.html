@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Movimientos de Inventario{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Movimientos de Inventario</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('inventario.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Movimientos</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-exchange-alt me-1"></i>
+                    Historial de Movimientos
+                </div>
+                <div class="btn-group">
+                    <a href="{{ url_for('inventario.registrar_entrada') }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Entrada
+                    </a>
+                    <a href="{{ url_for('inventario.registrar_salida') }}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-minus"></i> Salida
+                    </a>
+                    <a href="{{ url_for('inventario.registrar_ajuste') }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-adjust"></i> Ajuste
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <form method="get" class="row g-3">
+                    <div class="col-md-3">
+                        <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" 
+                               value="{{ request.args.get('fecha_inicio', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="fecha_fin" class="form-label">Fecha Fin</label>
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" 
+                               value="{{ request.args.get('fecha_fin', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ingrediente_id" class="form-label">Ingrediente</label>
+                        <select class="form-select" id="ingrediente_id" name="ingrediente_id">
+                            <option value="">Todos</option>
+                            {% for ingrediente in todos_ingredientes %}
+                            <option value="{{ ingrediente.ingrediente_id }}" 
+                                    {% if request.args.get('ingrediente_id') == ingrediente.ingrediente_id|string %}selected{% endif %}>
+                                {{ ingrediente.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="tipo_movimiento" class="form-label">Tipo</label>
+                        <select class="form-select" id="tipo_movimiento" name="tipo_movimiento">
+                            <option value="">Todos</option>
+                            <option value="entrada" {% if request.args.get('tipo_movimiento') == 'entrada' %}selected{% endif %}>Entradas</option>
+                            <option value="salida" {% if request.args.get('tipo_movimiento') == 'salida' %}selected{% endif %}>Salidas</option>
+                            <option value="ajuste" {% if request.args.get('tipo_movimiento') == 'ajuste' %}selected{% endif %}>Ajustes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                        <a href="{{ url_for('inventario.movimientos') }}" class="btn btn-secondary">
+                            <i class="fas fa-sync-alt"></i> Limpiar
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Ingrediente</th>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Usuario</th>
+                            <th>Motivo</th>
+                            <th>Costo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for movimiento in movimientos %}
+                        <tr>
+                            <td>{{ movimiento.fecha|datetimeformat('%d/%m/%Y %H:%M') }}</td>
+                            <td>{{ movimiento.ingrediente_nombre }}</td>
+                            <td>
+                                <span class="badge bg-{{ 'success' if movimiento.tipo_movimiento == 'entrada' else 'danger' if movimiento.tipo_movimiento == 'salida' else 'warning' }}">
+                                    {{ movimiento.tipo_movimiento|title }}
+                                </span>
+                            </td>
+                            <td>{{ movimiento.cantidad }} {{ movimiento.unidad_medida }}</td>
+                            <td>{{ movimiento.usuario_nombre }}</td>
+                            <td>{{ movimiento.motivo or '-' }}</td>
+                            <td>
+                                {% if movimiento.costo_total %}
+                                ${{ "%.2f"|format(movimiento.costo_total) }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">No se encontraron movimientos</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

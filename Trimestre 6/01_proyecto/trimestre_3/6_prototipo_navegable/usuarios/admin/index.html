@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Restaurante</title>
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../Gestión_Usuarios/index.html">Gestionar Usuarios</a></li>
+                    <li><a href="../../Inventario/Inventario.html">Gestionar Inventario</a>
+                    <li><a href="../admin/admin.html">Gestionar Reservas</a></li>
+                    <li><a href="#mesas">Asignar Mesas</a></li>
+                    <li><a href="#restaurante">Info Restaurante</a></li>
+                    <li><a href="../register.html">Registrar</a></li>
+                    <li><a id="logoutBtn">Cerrar sesión</a></li>
+
+                    </li>
+                </ul>
+            </nav>
+            
+        </aside>
+
+
+        <main class="main-content">
+
+
+            
+
+
+            <section id="mesas">
+                <h1>Asignar Mesas</h1>
+                <div class="table-grid">
+                    <div class="table-card">
+                        <h3>Mesa 1</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 2</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 3</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card
+">
+                        <h3>Mesa 4</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 5</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 6</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+
+                </div>
+
+                    <div class="table-card">
+                        <h3>Mesa 7</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 8</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 9</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 10</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 11</h3>
+                        <p>Estado: Libre</p>
+                        <button>Asignar</button>
+                    </div>
+                    <div class="table-card">
+                        <h3>Mesa 12</h3>
+                        <p>Estado: Ocupada</p>
+                        <button>Reasignar</button>
+                    </div>
+            </section>
+
+
+            <section id="restaurante">
+                <h1>Información del Restaurante</h1>
+                <div class="restaurant-info">
+                    <p><strong>Mesas Totales:</strong> 12</p>
+                    <p><strong>Mesas Ocupadas:</strong> 7</p>
+                    <p><strong>Personal Activo:</strong> 8</p>
+                    <p><strong>Ingresos Hoy:</strong> $1,250</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Cerrar sesión
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            localStorage.removeItem('currentUser');
+            window.location.href = '../../Inicio/index.html';
+        });
+    </script>
+
+</body>
+
+</html>

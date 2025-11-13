@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.slideshow {
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: url(../img/slide.jpg);
+}
+
+.slides {
+    display: flex;
+    width: 300%; /* 100% por cada imagen */
+    animation: slide 9s infinite; /* 3 segundos por imagen */
+    
+}
+
+.slides img {
+    width: 100%;
+    height: auto;
+}
+.collage {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+
+.collage contendor{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+
+}
+.info-cake {
+    flex: 0 0 auto; /* Prevents items from shrinking or growing */
+    width: 200px; /* Fixed width for each item */
+}
+
+.info-cake img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.info-cake h4 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    33.33% { transform: translateX(-100%); }
+    66.66% { transform: translateX(-200%); }
+    100% { transform: translateX(0); }
+}

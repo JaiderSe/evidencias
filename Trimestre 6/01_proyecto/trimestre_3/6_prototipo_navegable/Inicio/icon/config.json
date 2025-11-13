@@ -1,0 +1,40 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "9d3e9faf68fd4e12def853f0d4e1173b",
+      "css": "whatsapp",
+      "code": 62002,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "77b3693facc3d803417105997b4ffe96",
+      "css": "facebook",
+      "code": 59392,
+      "src": "typicons"
+    },
+    {
+      "uid": "627abcdb627cb1789e009c08e2678ef9",
+      "css": "twitter",
+      "code": 61593,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "4c1ef492f1d2c39a2250ae457cee2a6e",
+      "css": "instagram",
+      "code": 61805,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "5cc58545bb38c912940470480d3df145",
+      "css": "restaurant",
+      "code": 59442,
+      "src": "maki"
+    }
+  ]
+}

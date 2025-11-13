@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-5">
+        {% if platillo.imagen_url %}
+        <img src="{{ platillo.imagen_url }}" class="img-fluid rounded mb-3" alt="{{ platillo.nombre }}">
+        {% else %}
+        <div class="bg-light rounded mb-3 d-flex align-items-center justify-content-center" style="height: 300px;">
+            <i class="fas fa-utensils fa-5x text-muted"></i>
+        </div>
+        {% endif %}
+        
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-info-circle"></i> Información
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Categoría:</span>
+                        <span class="badge bg-primary">{{ platillo.categoria_nombre }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Precio:</span>
+                        <span class="text-success fw-bold">${{ "%.2f"|format(platillo.precio) }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Tiempo preparación:</span>
+                        <span>{{ platillo.tiempo_preparacion }} minutos</span>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Características:</span>
+                            <div>
+                                {% if platillo.es_vegano %}
+                                <span class="badge bg-success me-1">Vegano</span>
+                                {% endif %}
+                                {% if platillo.es_vegetariano %}
+                                <span class="badge bg-success me-1">Vegetariano</span>
+                                {% endif %}
+                                {% if not platillo.tiene_gluten %}
+                                <span class="badge bg-info text-dark me-1">Sin Gluten</span>
+                                {% endif %}
+                                {% if platillo.nivel_picante > 0 %}
+                                <span class="badge bg-danger">
+                                    Picante ({{ platillo.nivel_picante }}/5)
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-7">
+        <h2>{{ platillo.nombre }}</h2>
+        <p class="lead">{{ platillo.descripcion }}</p>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <i class="fas fa-list"></i> Ingredientes
+            </div>
+            <div class="card-body">
+                {% if ingredientes %}
+                <ul class="list-group list-group-flush">
+                    {% for ingrediente in ingredientes %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ ingrediente.nombre }}</span>
+                        <span class="badge bg-primary rounded-pill">
+                            {{ ingrediente.cantidad }} {{ ingrediente.unidad_medida }}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="alert alert-info">No se han definido ingredientes para este platillo</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        {% if current_user.is_authenticated and session.user_role in ['administrador', 'chef'] %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{{ url_for('chef.editar_receta', platillo_id=platillo.platillo_id) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Editar Receta
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

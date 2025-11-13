@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>mesero</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    
+</head>
+<body>
+
+    <header>
+        <div class="contenedor">
+
+            <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+                <input type="checkbox" id="menu-bar">
+                <label class="align-justify" for="menu-bar"></label>
+                
+            <nav class="menu">
+                <a id="logoutBtn">Salir</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="container">
+
+        <div class="new-order-container">
+
+            <div class="new-order-form">
+                <h2>Nuevo Pedido</h2>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="customer">Cliente</label>
+                        <input type="text" id="customer" placeholder="Nombre del cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="items">Items</label>
+                        <textarea id="items" rows="4" placeholder="Ej: Hamburguesa, Papas fritas"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mesa">Mesa</label>
+                        <select id="mesa">
+                            <option value="default"disabled selected>Selecciona una mesa</option>
+                            <option value="mesa-1">Mesa 1</option>
+                            <option value="mesa-2">Mesa 2</option>
+                            <option value="mesa-3">Mesa 3</option>
+                            <option value="mesa-4">Mesa 4</option>
+                            <option value="mesa-5">Mesa 5</option>
+                            <option value="mesa-6">Mesa 6</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Crear Pedido</button>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Pedidos - Cocina</h1>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="pending">Pendientes</button>
+                    <button class="filter-btn" data-filter="preparing">En Preparación</button>
+                    <button class="filter-btn" data-filter="ready">Listos</button>
+                </div>
+            </div>
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Mesa</th>
+                        <th>Items</th>
+                        <th>Estado</th>
+                        <th>Hora</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          localStorage.removeItem('currentUser');
+          window.location.href = '../Inicio/index.html';
+        });
+      </script>
+
+      <script src="./js/mesero.js"></script>
+</body>
+</html>

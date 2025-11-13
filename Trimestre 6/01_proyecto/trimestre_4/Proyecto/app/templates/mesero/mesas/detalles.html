@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Mesa {{ mesa.numero_mesa }} - Mesero{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Mesa {{ mesa.numero_mesa }}</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('mesero.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('mesero.listar_mesas') }}">Mesas</a></li>
+        <li class="breadcrumb-item active">Mesa {{ mesa.numero_mesa }}</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Información de la Mesa
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Número:</strong> {{ mesa.numero_mesa }}</p>
+                            <p><strong>Capacidad:</strong> {{ mesa.capacidad }} personas</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Ubicación:</strong> {{ mesa.ubicacion }}</p>
+                            <p>
+                                <strong>Estado:</strong> 
+                                <span class="badge bg-{{ 'success' if mesa.estado == 'disponible' else 'danger' if mesa.estado == 'ocupada' else 'warning' }}">
+                                    {{ mesa.estado|title }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if pedido %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <i class="fas fa-receipt me-1"></i>
+                    Pedido Actual #{{ pedido.pedido_id }}
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <p><strong>Cliente:</strong> {{ pedido.cliente_nombre or 'No registrado' }}</p>
+                        <p><strong>Hora:</strong> {{ pedido.fecha_hora|datetimeformat('%H:%M') }}</p>
+                        <p><strong>Notas:</strong> {{ pedido.notas or 'Ninguna' }}</p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Platillo</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Subtotal</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detalle in pedido.detalles %}
+                                <tr>
+                                    <td>{{ detalle.platillo_nombre }}</td>
+                                    <td>{{ detalle.cantidad }}</td>
+                                    <td>${{ "%.2f"|format(detalle.precio_unitario) }}</td>
+                                    <td>${{ "%.2f"|format(detalle.cantidad * detalle.precio_unitario) }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'secondary' if detalle.estado == 'pendiente' else 'warning' if detalle.estado == 'en preparacion' else 'success' }}">
+                                            {{ detalle.estado|title }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <tr class="table-primary fw-bold">
+                                    <td colspan="3">Total</td>
+                                    <td colspan="2">${{ "%.2f"|format(pedido.total) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <form method="POST" action="{{ url_for('mesero.cerrar_pedido', pedido_id=pedido.pedido_id) }}">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check-circle"></i> Cerrar Pedido
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-xl-6">
+            {% if mesa.estado == 'disponible' %}
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <i class="fas fa-plus-circle me-1"></i>
+                    Nuevo Pedido
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('mesero.crear_pedido') }}">
+                        <input type="hidden" name="mesa_id" value="{{ mesa.mesa_id }}">
+
+                        <div class="mb-3">
+                            <label for="cliente_id" class="form-label">Cliente</label>
+                            <select class="form-select" id="cliente_id" name="cliente_id">
+                                <option value="">Seleccionar cliente...</option>
+                                {% for cliente in clientes %}
+                                <option value="{{ cliente.cliente_id }}">{{ cliente.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted">Opcional</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Menú</label>
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                {% for platillo in platillos %}
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <img src="{{ platillo.imagen_url or url_for('static', filename='img/default-food.jpg') }}" 
+                                             class="card-img-top" alt="{{ platillo.nombre }}" style="height: 100px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{ platillo.nombre }}</h6>
+                                            <p class="card-text text-success fw-bold">${{ "%.2f"|format(platillo.precio) }}</p>
+                                            <input type="hidden" name="precio_{{ platillo.platillo_id }}" value="{{ platillo.precio }}">
+                                            <input type="number" class="form-control" name="platillo_{{ platillo.platillo_id }}" 
+                                                   min="0" value="0" placeholder="Cantidad">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notas" class="form-label">Notas adicionales</label>
+                            <textarea class="form-control" id="notas" name="notas" rows="2"></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Registrar Pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <i class="fas fa-utensils me-1"></i>
+                    Menú Disponible
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        {% for platillo in platillos %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="{{ platillo.imagen_url or url_for('static', filename='img/default-food.jpg') }}" 
+                                     class="card-img-top" alt="{{ platillo.nombre }}" style="height: 100px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ platillo.nombre }}</h6>
+                                    <p class="card-text text-muted">{{ platillo.descripcion|truncate(50) }}</p>
+                                    <p class="card-text text-success fw-bold">${{ "%.2f"|format(platillo.precio) }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

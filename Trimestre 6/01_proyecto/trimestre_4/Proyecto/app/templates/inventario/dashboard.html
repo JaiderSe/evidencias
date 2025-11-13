@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Inventario{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Panel de Inventario</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Resumen de Inventario</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-white">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    Ingredientes con Bajo Stock
+                </div>
+                <div class="card-body">
+                    {% if ingredientes_bajo_stock %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Ingrediente</th>
+                                    <th>Stock Actual</th>
+                                    <th>Stock Mínimo</th>
+                                    <th>Diferencia</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ingrediente in ingredientes_bajo_stock %}
+                                <tr>
+                                    <td>{{ ingrediente.nombre }}</td>
+                                    <td>{{ ingrediente.stock_actual }} {{ ingrediente.unidad_medida }}</td>
+                                    <td>{{ ingrediente.stock_minimo }} {{ ingrediente.unidad_medida }}</td>
+                                    <td class="text-danger">
+                                        {{ (ingrediente.stock_minimo - ingrediente.stock_actual)|round(2) }} {{ ingrediente.unidad_medida }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('inventario.registrar_entrada') }}?ingrediente_id={{ ingrediente.ingrediente_id }}" 
+                                           class="btn btn-sm btn-success">
+                                            <i class="fas fa-plus"></i> Reponer
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-1"></i>
+                        Todos los ingredientes tienen stock suficiente
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <i class="fas fa-chart-line me-1"></i>
+                    Movimientos Recientes
+                </div>
+                <div class="card-body">
+                    {% if movimientos_recientes %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Ingrediente</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for movimiento in movimientos_recientes %}
+                                <tr>
+                                    <td>{{ movimiento.fecha|datetimeformat('%d/%m %H:%M') }}</td>
+                                    <td>{{ movimiento.ingrediente_nombre }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if movimiento.tipo_movimiento == 'entrada' else 'danger' if movimiento.tipo_movimiento == 'salida' else 'warning' }}">
+                                            {{ movimiento.tipo_movimiento|title }}
+                                        </span>
+                                    </td>
+                                    <td>{{ movimiento.cantidad }} {{ movimiento.unidad_medida }}</td>
+                                    <td>{{ movimiento.usuario_nombre }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-end mt-2">
+                        <a href="{{ url_for('inventario.movimientos') }}" class="btn btn-sm btn-primary">
+                            Ver todos los movimientos
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        No hay movimientos recientes
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-boxes me-1"></i>
+            Resumen de Ingredientes
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <h5>Total Ingredientes</h5>
+                            <h2>{{ total_ingredientes }}</h2>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="{{ url_for('inventario.listar_ingredientes') }}">
+                                Ver Lista
+                            </a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <h5>Ingredientes con Stock OK</h5>
+                            <h2>{{ ingredientes_ok }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-warning text-dark mb-4">
+                        <div class="card-body">
+                            <h5>Próximos a Caducar</h5>
+                            <h2>{{ proximos_caducar }}</h2>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-dark stretched-link" href="{{ url_for('inventario.listar_ingredientes') }}?caducar=1">
+                                Ver Lista
+                            </a>
+                            <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

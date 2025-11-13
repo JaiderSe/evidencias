@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Órdenes Pendientes - Chef{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Órdenes Pendientes</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('chef.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Órdenes Pendientes</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-list me-1"></i>
+                    Lista de Órdenes
+                </div>
+                <div class="btn-group">
+                    <a href="{{ url_for('chef.pedidos_pendientes') }}" 
+                       class="btn btn-sm btn-outline-secondary {% if not request.args.get('estado') %}active{% endif %}">
+                        Todas
+                    </a>
+                    <a href="{{ url_for('chef.pedidos_pendientes') }}?estado=pendiente" 
+                       class="btn btn-sm btn-outline-secondary {% if request.args.get('estado') == 'pendiente' %}active{% endif %}">
+                        Pendientes
+                    </a>
+                    <a href="{{ url_for('chef.pedidos_pendientes') }}?estado=en preparacion" 
+                       class="btn btn-sm btn-outline-secondary {% if request.args.get('estado') == 'en preparacion' %}active{% endif %}">
+                        En Preparación
+                    </a>
+                    <a href="{{ url_for('chef.pedidos_pendientes') }}?estado=listo" 
+                       class="btn btn-sm btn-outline-secondary {% if request.args.get('estado') == 'listo' %}active{% endif %}">
+                        Listos
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Pedido #</th>
+                            <th>Mesa</th>
+                            <th>Platillo</th>
+                            <th>Cantidad</th>
+                            <th>Notas</th>
+                            <th>Estado</th>
+                            <th>Tiempo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detalle in detalles %}
+                        <tr>
+                            <td>{{ detalle.pedido_id }}</td>
+                            <td>{{ detalle.numero_mesa }}</td>
+                            <td>{{ detalle.platillo_nombre }}</td>
+                            <td>{{ detalle.cantidad }}</td>
+                            <td>
+                                {% if detalle.personalizaciones %}
+                                <small class="text-muted">{{ detalle.personalizaciones }}</small>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ 'secondary' if detalle.estado == 'pendiente' else 'warning' if detalle.estado == 'en preparacion' else 'success' }}">
+                                    {{ detalle.estado|title }}
+                                </span>
+                            </td>
+                            <td>
+                                {% set minutos = (ahora - detalle.fecha_hora).seconds // 60 %}
+                                <span class="{% if minutos > 30 %}text-danger{% elif minutos > 15 %}text-warning{% endif %}">
+                                    {{ minutos }} min
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    {% if detalle.estado == 'pendiente' %}
+                                    <button class="btn btn-warning btn-cambiar-estado" 
+                                            data-detalle-id="{{ detalle.detalle_id }}" 
+                                            data-nuevo-estado="en preparacion">
+                                        <i class="fas fa-fire"></i> Preparar
+                                    </button>
+                                    {% elif detalle.estado == 'en preparacion' %}
+                                    <button class="btn btn-success btn-cambiar-estado" 
+                                            data-detalle-id="{{ detalle.detalle_id }}" 
+                                            data-nuevo-estado="listo">
+                                        <i class="fas fa-check"></i> Listo
+                                    </button>
+                                    {% else %}
+                                    <span class="text-success">Esperando entrega</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center">No hay órdenes pendientes</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+{{ super() }}
+<script>
+$(document).ready(function() {
+    // Manejar cambio de estado
+    $('.btn-cambiar-estado').click(function() {
+        const detalleId = $(this).data('detalle-id');
+        const nuevoEstado = $(this).data('nuevo-estado');
+        
+        $.ajax({
+            url: "{{ url_for('chef.actualizar_estado') }}",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                detalle_id: detalleId,
+                nuevo_estado: nuevoEstado
+            }),
+            success: function(response) {
+                if (response.success) {
+                    location.reload();
+                } else {
+                    alert('Error al actualizar el estado');
+                }
+            },
+            error: function() {
+                alert('Error en la solicitud');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

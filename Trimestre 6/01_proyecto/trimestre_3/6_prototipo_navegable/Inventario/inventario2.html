@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con LocalStorage</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <div class="contenedor">
+    
+            <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+                <input type="checkbox" id="menu-bar">
+                <label class="align-justify" for="menu-bar"></label>
+                <nav class="menu">
+                  <a href="../usuarios/admin/index.html">Admin Panel</a>
+                </nav>
+        </div>
+    
+    </header>
+    <div class="container">
+        <h1>Gestión de Pedidos</h1>
+         
+        <!-- Formulario para agregar/editar productos -->
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <div class="form-group">
+                <label for="productName">Platillo:</label>
+                <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Cantidad:</label>
+                <input type="number" id="productPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="productStock">Mesa:</label>
+                <input type="number" id="productStock" required>
+            </div>
+            <button type="submit" id="submitBtn">Guardar</button>
+            <button type="button" id="cancelBtn" style="display: none;">Cancelar</button>
+        </form>
+        
+        <!-- Tabla de productos -->
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Platillo</th>
+                    <th>Cantidad</th>
+                    <th>Mesa</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/app2.js"></script>
+</body>
+</html>

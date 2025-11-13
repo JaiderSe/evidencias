@@ -1,0 +1,4 @@
+
+.icon-github-circled { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09b;&nbsp;'); }
+.icon-instagram { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf16d;&nbsp;'); }
+.icon-whatsapp { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf232;&nbsp;'); }

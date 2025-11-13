@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header>
+    <div class="contenedor">
+
+        <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+            <input type="checkbox" id="menu-bar">
+            <label class="align-justify" for="menu-bar"></label>
+            <nav class="menu">
+              <a href="../usuarios/admin/index.html">Admin Panel</a>
+            </nav>
+    </div>
+
+</header>
+
+<h1>Gestión de Usuarios</h1>
+<div class="form">
+<input type="text" id="buscador" placeholder="Buscar por nombre, correo o rol">
+
+<table id="tablaUsuarios">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Contraseña</th>
+      <th>Fecha de Creación</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="userTableBody"></tbody>
+</table>
+
+</div>
+ <script src="./java/script.js"></script>
+</body>
+</html>

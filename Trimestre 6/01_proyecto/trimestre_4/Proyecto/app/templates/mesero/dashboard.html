@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Mesero{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Panel del Mesero</h1>
+    
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Resumen de Mesas</li>
+    </ol>
+
+    <div class="row">
+        {% for mesa in mesas %}
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-{{ 'success' if mesa.estado == 'disponible' else 'danger' if mesa.estado == 'ocupada' else 'warning' }} shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Mesa {{ mesa.numero_mesa }}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ mesa.estado|title }}
+                            </div>
+                            <div class="mt-2">
+                                {% if mesa.estado == 'ocupada' %}
+                                <span class="badge bg-primary">
+                                    {{ mesa.capacidad }} personas
+                                </span>
+                                <span class="badge bg-warning text-dark">
+                                     items
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-utensils fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('mesero.ver_mesa', mesa_id=mesa.mesa_id) }}" 
+                       class="btn btn-sm btn-{{ 'primary' if mesa.estado == 'disponible' else 'warning' }}">
+                        {% if mesa.estado == 'disponible' %}
+                        <i class="fas fa-plus"></i> Nuevo Pedido
+                        {% else %}
+                        <i class="fas fa-edit"></i> Ver Pedido
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Pedidos Activos
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover" id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Pedido #</th>
+                        <th>Mesa</th>
+                        <th>Cliente</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos_activos %}
+                    <tr>
+                        <td>{{ pedido.pedido_id }}</td>
+                        <td>{{ pedido.numero_mesa }}</td>
+                        <td>{{ pedido.cliente_nombre or 'Sin registrar' }}</td>
+                        <td>{{ pedido.detalles|length }}</td>
+                        <td>${{ "%.2f"|format(pedido.total) }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'primary' if pedido.estado == 'recibido' else 'warning' if pedido.estado == 'en preparacion' else 'success' if pedido.estado == 'listo' else 'info' }}">
+                                {{ pedido.estado|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('mesero.ver_pedido', pedido_id=pedido.pedido_id) }}" 
+                               class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay pedidos activos</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

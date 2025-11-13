@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Artistas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    {% extends "base.html" %}
+
+{% block title %}{{ artista.nombre_artista }} - Colección Musical{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ artista.nombre_artista }}</h1>
+        <div>
+            <a href="{{ url_for('artista.editar', id_artista=artista.id_artista) }}" 
+               class="btn btn-sm btn-outline-primary me-2">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+            <form action="{{ url_for('artista.eliminar', id_artista=artista.id_artista) }}" 
+                  method="post" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('¿Estás seguro de eliminar este artista?');">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Álbumes del artista -->
+    <h3 class="mt-5 mb-3">Álbumes</h3>
+    {% if albumes %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for album in albumes %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ album.titulo }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ album.ano_produccion }}</h6>
+                    <p class="card-text">{{ album.descripcion|truncate(100) }}</p>
+                    <a href="{{ url_for('album.detalle', id_album=album.id_album) }}" 
+                       class="btn btn-sm btn-outline-primary">Ver álbum</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">Este artista no tiene álbumes registrados</div>
+    {% endif %}
+</div>
+{% endblock %}
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

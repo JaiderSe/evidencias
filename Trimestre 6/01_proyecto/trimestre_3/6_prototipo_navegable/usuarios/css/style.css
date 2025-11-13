@@ -1,0 +1,206 @@
+@import url(../../Inicio/css/menu.css);
+
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+body {
+    background-color: #22090b;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+h2 {
+
+    margin-bottom: 20px;
+  
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+#registerForm{
+    width: 300px;
+    height: auto;
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    
+}
+
+#userGreeting {
+    margin-right: 1rem;
+}
+
+button {
+    width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: #8C0303;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+    background-color: #6e2027;
+}
+
+#logoutBtn {
+    background-color: #8C0303;
+}
+
+#logoutBtn:hover {
+    background-color: #6e2027;
+}
+
+/* Estilos para el panel de administración */
+.admin-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-stats {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.stat-card h3 {
+    margin-top: 0;
+    color: #666;
+}
+
+.stat-card p {
+    font-size: 2rem;
+    margin: 0.5rem 0 0;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para la vista de productos */
+.products-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.product-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-card h3 {
+    margin-top: 0;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #570700;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Estilos para formularios de autenticación */
+.auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 40px 50px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 29px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-link a {
+    color: #d52700;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+

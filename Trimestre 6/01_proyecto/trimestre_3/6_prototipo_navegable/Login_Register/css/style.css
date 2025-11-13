@@ -1,0 +1,178 @@
+@import url('../../Inicio/css/menu.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: linear-gradient(200deg, #592519, #290d07);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-group {
+  margin-bottom: 10 px;
+}
+
+.slideshow {
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: url(../img/slide.jpg);
+}
+
+.slides {
+  display: flex;
+  width: 300%; /* 100% por cada imagen */
+  animation: slide 9s infinite; /* 3 segundos por imagen */
+  
+}
+
+.slides img {
+  width: 100%;
+  height: auto;
+}
+
+
+.role {
+  display: flex;
+  margin: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10 px;
+  
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+.form-group input,
+.form-group select {
+
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.container {
+  width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+
+}
+
+.form-container {
+  position: center;
+  display: flex;
+  align-items: center; 
+  width: 100%;
+  height: 460px;
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+#click:checked ~ .form-container {            
+  transform: rotateY(180deg);
+}
+
+.form {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  backface-visibility: hidden;
+}
+
+.form h2 {
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+
+
+.form input {
+  width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+
+.form button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: #592519;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+
+.form button:hover {
+  background: #D9B29C;
+}
+
+.form label {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+  cursor: pointer;
+}
+
+.form label span {
+  color: #592519;
+  font-weight: bold;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.form label span:hover {
+  color: #D9B29C;
+  cursor: pointer;
+}
+
+.registro {
+  transform: rotateY(180deg);
+}
+header{
+  width: 100%;
+  height: 50px;
+  background: #460303;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.contenedor{
+  width: 90%;
+  margin: auto;
+}
+header .contenedor {
+  display: table;
+  
+}
+h1{
+  float: left;
+}

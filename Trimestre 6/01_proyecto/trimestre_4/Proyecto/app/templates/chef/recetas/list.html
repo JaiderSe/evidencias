@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Recetas - Chef{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Recetas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('chef.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Recetas</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-book me-1"></i>
+                    Lista de Recetas
+                </div>
+                <a href="{{ url_for('chef.crear_receta') }}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Nueva Receta
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for platillo in platillos %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ platillo.imagen_url or url_for('static', filename='img/default-food.jpg') }}" 
+                             class="card-img-top" alt="{{ platillo.nombre }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ platillo.nombre }}</h5>
+                            <p class="card-text">{{ platillo.descripcion|truncate(100) }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">{{ platillo.categoria_nombre }}</span>
+                                <span class="text-muted">{{ platillo.tiempo_preparacion }} min</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="{{ url_for('chef.ver_receta', platillo_id=platillo.platillo_id) }}" 
+                               class="btn btn-primary btn-sm">
+                                <i class="fas fa-book-open"></i> Ver Receta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">No hay recetas registradas</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

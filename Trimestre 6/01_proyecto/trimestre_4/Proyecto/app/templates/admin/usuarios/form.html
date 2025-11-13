@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}{{ accion }} Usuario{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{ accion }} Usuario</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-user-edit me-1"></i>
+            Formulario de Usuario
+        </div>
+        <div class="card-body">
+            {% if accion == 'Crear' %}
+            <form method="POST" action="{{ url_for('admin.crear_usuario') }}">
+               
+            {% else %}
+            <form method="post" action="{{ url_for('admin.editar_usuario', usuario_id=usuario.usuario_id) }}">
+
+            {% endif %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                               value="{{ usuario.nombre if usuario }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               value="{{ usuario.email if usuario }}" required>
+                    </div>
+                </div>
+                
+                {% if accion == 'Crear' %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-select" id="rol" name="rol" required>
+                            <option value="">Seleccionar Rol</option>
+                            <option value="administrador" {{ 'selected' if usuario and usuario.rol == 'administrador' }}>Administrador</option>
+                            <option value="chef" {{ 'selected' if usuario and usuario.rol == 'chef' }}>Chef</option>
+                            <option value="mesero" {{ 'selected' if usuario and usuario.rol == 'mesero' }}>Mesero</option>
+                            <option value="inventario" {{ 'selected' if usuario and usuario.rol == 'inventario' }}>Inventario</option>
+                        </select>
+                    </div>
+                    {% if accion == 'Editar' %}
+                    <div class="col-md-6">
+                        <div class="form-check mt-4 pt-2">
+                            <input class="form-check-input" type="checkbox" id="activo" name="activo" 
+                                   {{ 'checked' if usuario and usuario.activo }}>
+                            <label class="form-check-label" for="activo">
+                                Usuario Activo
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">{{ accion }}</button>
+                    <a href="{{ url_for('admin.listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

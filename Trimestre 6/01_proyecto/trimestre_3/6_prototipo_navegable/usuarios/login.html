@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="contenedor">
+
+            <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+                <input type="checkbox" id="menu-bar">
+                <label class="align-justify" for="menu-bar"></label>
+                
+            <nav class="menu">
+                <a href="../Reserva/Calendario/Html/index.html">Reserva</a>
+                <a href="../Comentarios/Comentarios/index.html">Comentarios</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <div class="auth-container">
+        <form id="loginForm">
+            <h2>Iniciar Sesión</h2>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Ingresar</button>
+            
+        </form>
+    </div>
+
+    <script src="./js/auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Obtener usuarios registrados
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Buscar usuario
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Guardar usuario actual en sesión
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Redirigir según rol
+                if (user.role === 'admin') {
+                    window.location.href = './admin/index.html';
+                }
+                else if (user.role === 'mesero') {
+                    window.location.href = '../Pedidos/index.html';
+                } else if (user.role === 'cocinero') {
+                    window.location.href = './cocinero/index.html';
+                } 
+                else {
+                    window.location.href = '../Inicio/index.html';
+                }
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        });
+    </script>
+</body>
+</html>

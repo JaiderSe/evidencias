@@ -1,0 +1,42 @@
+<div class="card h-100 shadow-sm">
+    {% if platillo.imagen_url %}
+    <img src="{{ platillo.imagen_url }}" class="card-img-top" alt="{{ platillo.nombre }}" style="height: 180px; object-fit: cover;">
+    {% else %}
+    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+        <i class="fas fa-utensils fa-3x text-muted"></i>
+    </div>
+    {% endif %}
+    
+    <div class="card-body">
+        <h5 class="card-title">{{ platillo.nombre }}</h5>
+        <p class="card-text text-muted">{{ platillo.descripcion|truncate(100) }}</p>
+        
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="badge bg-primary">{{ platillo.categoria_nombre }}</span>
+            <span class="text-success fw-bold">${{ "%.2f"|format(platillo.precio) }}</span>
+        </div>
+        
+        <div class="d-flex flex-wrap gap-1 mb-3">
+            {% if platillo.es_vegano %}
+            <span class="badge bg-success">Vegano</span>
+            {% endif %}
+            {% if platillo.es_vegetariano %}
+            <span class="badge bg-success">Vegetariano</span>
+            {% endif %}
+            {% if not platillo.tiene_gluten %}
+            <span class="badge bg-info text-dark">Sin Gluten</span>
+            {% endif %}
+            {% if platillo.nivel_picante > 0 %}
+            <span class="badge bg-danger">
+                {% for i in range(platillo.nivel_picante) %}🌶{% endfor %}
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="card-footer bg-transparent">
+        <a href="{{ url_for('menu.ver_platillo', platillo_id=platillo.platillo_id) }}" class="btn btn-primary btn-sm">
+            <i class="fas fa-info-circle"></i> Ver Detalles
+        </a>
+    </div>
+</div>

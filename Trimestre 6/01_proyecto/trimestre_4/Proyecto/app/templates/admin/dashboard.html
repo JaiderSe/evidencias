@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Administrativo{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h1>Dashboard Administrativo</h1>
+        <a href="{{ url_for('admin.listar_usuarios') }}" class="btn btn-outline-primary">
+            Gestión de Usuarios
+        </a>
+    </div>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Resumen del sistema</li>
+    </ol>
+    
+    <!-- Estadísticas Rápidas -->
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <h5>Total Usuarios</h5>
+                    <h2>{{ total_usuarios }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <h5>Pedidos Hoy</h5>
+                    <h2>{{ pedidos_hoy }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-info text-white mb-4">
+                <div class="card-body">
+                    <h5>Ingresos Hoy</h5>
+                    <h2></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    <h5>Mesas Ocupadas</h5>
+                    <h2>{{ mesas_ocupadas }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Últimos Pedidos -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Últimos Pedidos
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mesa</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in ultimos_pedidos %}
+                    <tr>
+                        <td>{{ pedido.pedido_id }}</td>
+                        <td>{{ pedido.numero_mesa }}</td>
+                        <td>${{ "%.2f"|format(pedido.total) }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'success' if pedido.estado == 'pagado' else 'warning' }}">
+                                {{ pedido.estado|title }}
+                            </span>
+                        </td>
+                        <td>{{ pedido.fecha_hora|datetimeformat }}</td>
+                        <td>
+                            <a href="{{ url_for('pedidos.detalle_pedido', pedido_id=pedido.pedido_id) }}" class="btn btn-sm btn-primary">Ver</a>
+                        </td>   
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

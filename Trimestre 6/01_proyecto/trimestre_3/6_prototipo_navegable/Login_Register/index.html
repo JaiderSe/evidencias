@@ -1,0 +1,182 @@
+    <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de sesión y Registro</title>
+    <link rel="stylesheet" href="../Inicio/css/fontello.css">
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+
+    <header>
+        <div class="contenedor">
+
+            <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+                <input type="checkbox" id="menu-bar">
+                <label class="align-justify" for="menu-bar"></label>
+                
+            <nav class="menu">
+                <a href="../Pedidos/index.html">Pedidos</a>
+                <a href="../usuarios/login.html">Login</a>
+                <a href="../Reserva/Calendario/Html/index.html">Reserva</a>
+                <a href="../Comentarios/Comentarios/index.html">Comentarios</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <div class="container">
+        <input type="checkbox" id="click" hidden>
+
+        <div class="form-container">
+
+
+            <div class="form inicio-sesion">
+                <h2>Inicio de sesión</h2>
+                <input type="text" placeholder="Usuario" required />
+                <input type="password" placeholder="Contraseña" required />
+                <button>Iniciar sesión</button>
+                <label for="click">¿No tienes una cuenta? <span>Regístrate</span></label>
+                <div style="text-align: center; padding: 20px;">
+                    <img src="../Inicio/img/logo.png" alt="" width="100px" height="auto" class="logo" />
+                </div>  
+            </div>
+
+
+            <div class="form registro">
+                <form id="registerForm">
+                    <h2>Crear Cuenta</h2>
+                    <div class="form-group">
+
+                        <input type="text" id="name" required placeholder="Nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder="Correo electrónico"> 
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" required placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" required placeholder="Confirmar contraseña">
+                    </div>
+                    <div class="form-group">
+                       
+                        <select id="role" required placeholder="Seleccionar...">
+                            <option value="">Tipo de cuenta</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="admin">Administrador</option>
+                            <option value="cocinero">Cocinero</option>
+                            <option value="repartidor">Repartidor</option>
+                            <option value="mesero">Mesero</option>
+        
+                        </select>
+                    </div>
+                    
+                    <center>
+                        <button type="submit" class="btn">Registrarse</button >
+                    </center>
+                    
+                    <label for="click">¿Ya tienes una cuenta? <span>Inicia sesión</span></label>
+                    
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('form inicio-sesion').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Obtener usuarios registrados
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Buscar usuario
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Guardar usuario actual en sesión
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Redirigir según rol
+                if (user.role === 'admin') {
+                    window.location.href = './admin/dashboard.html';
+                }
+                else if (user.role === 'cocinero') {
+                    window.location.href = './cocinero/dashboard.html';
+                }
+                else if (user.role === 'repartidor') {
+                    window.location.href = './repartidor/dashboard.html';
+                }
+                else if (user.role === 'mesero') {
+                    window.location.href = './mesero/dashboard.html';
+                }
+                 else {
+                    window.location.href = './cliente/productos.html';
+                }
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('registro').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const role = document.getElementById('role').value;
+            
+            // Validaciones
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            if (!role) {
+                alert('Debes seleccionar un tipo de cuenta');
+                return;
+            }
+            
+            // Obtener usuarios existentes
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Verificar si el email ya está registrado
+            if (users.some(u => u.email === email)) {
+                alert('Este correo ya está registrado');
+                return;
+            }
+            
+            // Crear nuevo usuario (en un caso real, NUNCA guardarías la contraseña así)
+            const newUser = {
+                id: Date.now().toString(),
+                name,
+                email,
+                password, // ¡En producción usarías hash!
+                role,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Guardar usuario
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert('Registro exitoso. Ahora puedes iniciar sesión.');
+            window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+        });
+    </script>
+</body>
+
+</html>

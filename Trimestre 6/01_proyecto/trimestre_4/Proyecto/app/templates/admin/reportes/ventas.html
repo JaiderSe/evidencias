@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Reporte de Ventas{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Reporte de Ventas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Reporte de Ventas</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-bar me-1"></i>
+            Filtros del Reporte
+        </div>
+        <div class="card-body">
+            <form method="get" action="{{ url_for('admin.reporte_ventas') }}" class="row g-3">
+                <div class="col-md-3">
+                    <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                    <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" 
+                           value="{{ fecha_inicio }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="fecha_fin" class="form-label">Fecha Fin</label>
+                    <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" 
+                           value="{{ fecha_fin }}" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="agrupacion" class="form-label">Agrupar por</label>
+                    <select class="form-select" id="agrupacion" name="agrupacion">
+                        <option value="dia" {% if agrupacion=='dia' %}selected{% endif %}>Día</option>
+                        <option value="semana" {% if agrupacion=='semana' %}selected{% endif %}>Semana</option>
+                        <option value="mes" {% if agrupacion=='mes' %}selected{% endif %}>Mes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Generar Reporte</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Ventas por {{ 'día' if agrupacion=='dia' else 'semana' if agrupacion=='semana' else 'mes' }}
+                </div>
+                <div class="card-body">
+                    <canvas id="ventasChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie me-1"></i>
+                    Ventas por Categoría
+                </div>
+                <div class="card-body">
+                    <canvas id="categoriasChart" width="100%" height="40"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Detalle de Ventas
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered" id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Total Pedidos</th>
+                        <th>Total Ventas</th>
+                        <th>Promedio por Pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas_por_periodo %}
+                    <tr>
+                        <td>{{ venta.periodo_formateado }}</td>
+                        <td>{{ venta.total_pedidos }}</td>
+                        <td>${{ "%.2f"|format(venta.total_ventas) }}</td>
+                        <td>${{ "%.2f"|format(venta.total_ventas/venta.total_pedidos if venta.total_pedidos > 0 else 0) }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="table-primary fw-bold">
+                        <td>TOTAL</td>
+                        <td>{{ total_pedidos }}</td>
+                        <td>${{ "%.2f"|format(total_ventas) }}</td>
+                        <td>${{ "%.2f"|format(total_ventas/total_pedidos if total_pedidos > 0 else 0) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de ventas por periodo
+    const ventasCtx = document.getElementById('ventasChart').getContext('2d');
+    const ventasChart = new Chart(ventasCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ ventas_labels|tojson }},
+            datasets: [{
+                label: 'Ventas ($)',
+                data: {{ ventas_data|tojson }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de ventas por categoría
+    const categoriasCtx = document.getElementById('categoriasChart').getContext('2d');
+    const categoriasChart = new Chart(categoriasCtx, {
+        type: 'pie',
+        data: {
+            labels: {{ categorias_labels|tojson }},
+            datasets: [{
+                data: {{ categorias_data|tojson }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

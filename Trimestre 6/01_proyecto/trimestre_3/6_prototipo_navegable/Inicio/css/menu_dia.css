@@ -1,0 +1,130 @@
+.menu-scroll {
+  max-height: 600px; /* O el tamaño que tú quieras */
+  overflow-y: auto;
+  padding-right: 10px; /* Espacio para no tapar con la barra */
+}
+
+/* Si quieres que la barra se vea bonita: */
+.menu-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.menu-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.menu-scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.catalogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;  
+    max-width: 1200px;
+    height: auto;
+    max-height: 1000px;
+    margin: 0 auto;
+    margin-top: 60px;
+    padding: 20px 4px 0px 20px; 
+    background: #e4dfd6;
+    border-radius: 12px;
+  }
+  
+  .catalogo h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #4b090e;
+    margin-bottom: 30px;
+  }
+  
+  .grid-platos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 40px 20px;
+    margin-bottom: 100px;
+  }
+  
+  .plato-card {
+    text-align: center;
+    position: relative;         /* Para que el precio se posicione dentro */
+    height: 105%;       /* Espacio para el precio */
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Para que el precio no sobresalga */
+  }
+  
+  .plato-card .precio {
+    position: absolute;
+    bottom: 10px;              
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: green;
+  }
+  
+
+  .plato-card:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+  }
+  
+  .plato-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .plato-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #2c3e50;
+  }
+  
+  .plato-card p {
+    font-size: 0.95em;
+    color: #7f8c8d;
+  }
+  
+  
+  
+
+
+  button {
+    border: none;
+    padding: 5px 20px;
+    margin: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  
+  button:hover {
+    background-color: #6e2027;
+    color: white;
+  }
+
+  button.activo {
+    background-color: #6e2027;
+    color: white;
+    border: none;
+  }
+  
+  .plato-card {
+    display: none; /* Se ocultan todas las tarjetas por defecto */
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .plato-card img {
+    width: 100%;
+    height: auto;
+  }
+  

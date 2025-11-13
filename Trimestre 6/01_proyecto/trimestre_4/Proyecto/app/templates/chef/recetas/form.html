@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Crear' if accion == 'Crear' else 'Editar' }} Receta - Chef{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{ accion }} Receta</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('chef.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('chef.listar_recetas') }}">Recetas</a></li>
+        <li class="breadcrumb-item active">{{ accion }} Receta</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-edit me-1"></i>
+            Formulario de Receta
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" 
+                  action="{{ url_for('chef.crear_receta') if accion == 'Crear' else url_for('chef.editar_receta', platillo_id=platillo.platillo_id) }}">
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre del Platillo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                               value="{{ platillo.nombre if platillo }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="categoria_id" class="form-label">Categoría</label>
+                        <select class="form-select" id="categoria_id" name="categoria_id" required>
+                            <option value="">Seleccionar categoría</option>
+                            {% for categoria in categorias %}
+                            <option value="{{ categoria.categoria_id }}" 
+                                    {% if platillo and platillo.categoria_id == categoria.categoria_id %}selected{% endif %}>
+                                {{ categoria.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" 
+                              rows="3">{{ platillo.descripcion if platillo }}</textarea>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="precio" class="form-label">Precio ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="precio" name="precio" 
+                               value="{{ platillo.precio if platillo }}" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="tiempo_preparacion" class="form-label">Tiempo Preparación (min)</label>
+                        <input type="number" class="form-control" id="tiempo_preparacion" name="tiempo_preparacion" 
+                               value="{{ platillo.tiempo_preparacion if platillo else 20 }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input class="form-control" type="file" id="imagen" name="imagen" accept="image/*">
+                        {% if platillo and platillo.imagen_url %}
+                        <small class="text-muted">Imagen actual: {{ platillo.imagen_url }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Características</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="es_vegano" name="es_vegano" 
+                                   {% if platillo and platillo.es_vegano %}checked{% endif %}>
+                            <label class="form-check-label" for="es_vegano">Vegano</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="es_vegetariano" name="es_vegetariano" 
+                                   {% if platillo and platillo.es_vegetariano %}checked{% endif %}>
+                            <label class="form-check-label" for="es_vegetariano">Vegetariano</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="tiene_gluten" name="tiene_gluten" 
+                                   {% if platillo and platillo.tiene_gluten %}checked{% endif %}>
+                            <label class="form-check-label" for="tiene_gluten">Contiene Gluten</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="nivel_picante" class="form-label">Nivel de Picante (0-5)</label>
+                    <input type="range" class="form-range" min="0" max="5" id="nivel_picante" name="nivel_picante" 
+                           value="{{ platillo.nivel_picante if platillo else 0 }}">
+                    <div class="d-flex justify-content-between">
+                        <small>Suave</small>
+                        <small>Picante</small>
+                    </div>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="activo" name="activo" 
+                           {% if not platillo or platillo.activo %}checked{% endif %}>
+                    <label class="form-check-label" for="activo">Disponible en el menú</label>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-primary">{{ accion }} Receta</button>
+                    <a href="{{ url_for('chef.listar_recetas') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

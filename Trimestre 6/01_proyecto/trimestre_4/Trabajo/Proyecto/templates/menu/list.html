@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Menú del Restaurante</h2>
+    <a href="{{ url_for('menu.create_dish') }}" class="btn btn-primary mb-3">Nuevo Platillo</a>
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Tiempo Prep.</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dish in dishes %}
+                <tr>
+                    <td>{{ dish.nombre }}</td>
+                    <td>${{ "%.2f"|format(dish.precio) }}</td>
+                    <td>{{ dish.tiempo_preparacion }} min</td>
+                    <td>
+                        <a href="{{ url_for('menu.detail_dish', id=dish.platillo_id) }}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{{ url_for('menu.edit_dish', id=dish.platillo_id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

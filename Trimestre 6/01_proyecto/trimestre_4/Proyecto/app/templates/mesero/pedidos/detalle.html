@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Pedido #{{ pedido.id }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4>Detalle del Pedido #{{ pedido.id }}</h4>
+                    <span class="badge {{ get_badge_class_pedido(pedido.estado) }}">
+                        {{ pedido.estado|capitalize }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Información General</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Mesa:</strong> {{ pedido.mesa_nombre }} ({{ pedido.mesa_codigo }})
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Cliente:</strong> 
+                                    {% if pedido.cliente_nombre %}
+                                        {{ pedido.cliente_nombre }} - {{ pedido.cliente_telefono }}
+                                    {% else %}
+                                        No especificado
+                                    {% endif %}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Fecha/Hora:</strong> {{ pedido.fecha_creacion|datetime_format }}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Atendido por:</strong> {{ pedido.usuario_nombre }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Notas del Pedido</h5>
+                            <div class="border p-3 bg-light">
+                                {% if pedido.notas %}
+                                    {{ pedido.notas }}
+                                {% else %}
+                                    <em>No hay notas para este pedido</em>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="mb-3">Platillos Pedidos</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Platillo</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Subtotal</th>
+                                    <th>Estado</th>
+                                    {% if user_role in ['administrador', 'chef'] %}
+                                    <th>Acciones</th>
+                                    {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detalle in pedido.detalles %}
+                                <tr>
+                                    <td>{{ detalle.platillo_nombre }}</td>
+                                    <td>{{ detalle.cantidad }}</td>
+                                    <td>${{ detalle.precio|number_format(2) }}</td>
+                                    <td>${{ (detalle.cantidad * detalle.precio)|number_format(2) }}</td>
+                                    <td>
+                                        <span class="badge {{ get_badge_class_pedido(detalle.estado) }}">
+                                            {{ detalle.estado|capitalize }}
+                                        </span>
+                                    </td>
+                                    {% if user_role in ['administrador', 'chef'] %}
+                                    <td>
+                                        <div class="btn-group">
+                                            {% if detalle.estado == 'recibido' %}
+                                            <button class="btn btn-sm btn-warning btn-update-status" 
+                                                    data-detalle-id="{{ detalle.id }}" 
+                                                    data-new-status="en preparacion">
+                                                Preparar
+                                            </button>
+                                            {% elif detalle.estado == 'en preparacion' %}
+                                            <button class="btn btn-sm btn-info btn-update-status" 
+                                                    data-detalle-id="{{ detalle.id }}" 
+                                                    data-new-status="listo">
+                                                Marcar Listo
+                                            </button>
+                                            {% elif detalle.estado == 'listo' %}
+                                            <button class="btn btn-sm btn-success btn-update-status" 
+                                                    data-detalle-id="{{ detalle.id }}" 
+                                                    data-new-status="entregado">
+                                                Marcar Entregado
+                                            </button>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-right">Total:</th>
+                                    <th>${{ pedido.total|number_format(2) }}</th>
+                                    <th colspan="2"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <a href="{{ url_for('pedidos.listar_pedidos') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver a la lista
+                        </a>
+                        
+                        {% if user_role in ['administrador', 'mesero'] and pedido.estado != 'pagado' %}
+                        <form action="{{ url_for('pedidos.cerrar_pedido', pedido_id=pedido.id) }}" method="POST">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check-circle"></i> Cerrar y Marcar como Pagado
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Manejar cambios de estado de los detalles del pedido
+    $('.btn-update-status').click(function() {
+        const detalleId = $(this).data('detalle-id');
+        const newStatus = $(this).data('new-status');
+        
+        $.ajax({
+            url: "{{ url_for('pedidos.actualizar_estado_pedido', pedido_id=pedido.id) }}",
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                detalle_id: detalleId,
+                estado: newStatus
+            }),
+            success: function(response) {
+                if(response.success) {
+                    location.reload(); // Recargar para ver los cambios
+                } else {
+                    alert('Error al actualizar el estado');
+                }
+            },
+            error: function() {
+                alert('Error en la solicitud');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

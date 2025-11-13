@@ -1,0 +1,45 @@
+    body {
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      background-color: #3e2723;
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      text-align: center !important;
+      align-items: center !important;
+    }
+    .hero {
+      background-image: url(https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+      background-size: cover;
+      background-position: center;
+      color: rgb(255, 255, 255);
+      padding: 100px 0;
+      text-align: center;
+    }
+    .menu-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    .section-title {
+      margin: 60px 0 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #3e2723;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .btn-primary {
+      background-color: #6d4c41;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #5d4037;
+    }
+
+    .nosotros{
+      align-items: center;
+    }

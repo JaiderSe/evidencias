@@ -1,0 +1,88 @@
+@import url(../../../Inicio/css/menu.css);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #22090b;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor de comentarios */
+.comentarios-container {
+    background-color: white;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: black;
+}
+
+/* Estilo de cada comentario */
+.comentario {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.comentario .usuario {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.comentario .fecha {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.comentario .texto-comentario {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Estilo del formulario de nuevo comentario */
+.nuevo-comentario {
+    margin-top: 30px;
+}
+
+.nuevo-comentario h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: black;
+}
+
+textarea {
+    width: 96%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+button {
+    padding: 9px 12px;
+    background-color: #8C0303;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #6e2027;
+}

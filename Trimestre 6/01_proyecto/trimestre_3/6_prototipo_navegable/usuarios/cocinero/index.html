@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Pedidos - Cocina</title>
+    <link rel="stylesheet" href="./css/style.css">
+    
+</head>
+<body>
+
+    <header>
+        <div class="contenedor">
+
+            <h1> <a href="../Inicio/index.html">Restausync</a></h1>   
+                <input type="checkbox" id="menu-bar">
+                <label class="align-justify" for="menu-bar"></label>
+                
+            <nav class="menu">
+                <a id="logoutBtn">Salir</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="container">
+
+
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>Gestión de Pedidos - Cocina</h1>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="pending">Pendientes</button>
+                    <button class="filter-btn" data-filter="preparing">En Preparación</button>
+                    <button class="filter-btn" data-filter="ready">Listos</button>
+                </div>
+            </div>
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Mesa</th>
+                        <th>Items</th>
+                        <th>Estado</th>
+                        <th>Hora</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="status-pending priority-high">
+                        <td class="order-id">#001</td>
+                        <td>Juan Pérez</td>
+                        <td>Mesa 5</td>
+                        <td>Hamburguesa con queso, Papas fritas grandes</td>
+                        <td>Pendiente</td>
+                        <td class="timestamp">10:15 AM</td>
+                        <td>
+                            <button class="btn btn-prepare">Entregar</button>
+                        </td>
+                    </tr>
+                    <tr class="status-preparing">
+                        <td class="order-id">#002</td>
+                        <td>María Gómez</td>
+                        <td>Mesa 3</td>
+                        <td>Pizza Margarita, Refresco 500ml</td>
+                        <td>En preparación</td>
+                        <td class="timestamp">10:20 AM</td>
+                        <td>
+                            <button class="btn btn-ready">Entregar</button>
+                        </td>
+                    </tr> 
+                    <tr class="status-ready">
+                        <td class="order-id">#003</td>
+                        <td>Carlos Ruiz</td>
+                        <td>Mesa 2</td>
+                        <td>Ensalada César, Jugo natural</td>
+                        <td>Listo</td>
+                        <td class="timestamp">10:25 AM</td>
+                        <td>
+                            <button class="btn btn-details">Entregar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          localStorage.removeItem('currentUser');
+          window.location.href = '../Inicio/index.html';
+        });
+      </script>
+
+      <script src="./js/cocinero.js"></script>
+</body>
+</html>
